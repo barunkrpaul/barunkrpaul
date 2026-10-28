@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1044 465" width="1044px" height="465px" font-family="ConsolasFallback,Consolas,Menlo,'DejaVu Sans Mono',monospace" font-size="16px">
+<style>
+@font-face { src: local('Consolas'), local('Consolas Bold'); font-family: 'ConsolasFallback'; font-display: swap; -webkit-size-adjust: 109%; size-adjust: 109%; }
+.key {fill: #ffa657;} .value {fill: #a5d6ff;} .dim {fill: #616e7f;}
+text, tspan {white-space: pre;}
+</style>
+<rect width="1044" height="465" fill="#161b22" rx="15"/>
+<g fill="#c9d1d9" xml:space="preserve">
+<text x="15" y="30">         .:;i;i;;ii;:,,..</text>
+<text x="15" y="50">       .;iii1ttt1111i;;;;;::,.</text>
+<text x="15" y="70">      :iiittfLLCCCCCLft1;;:::;:,</text>
+<text x="15" y="90">     :1i1fCG088@@@@88000Ct;::::;:.</text>
+<text x="15" y="110">    :i;tG08@@@@@@880GGG000C1;;i::;,</text>
+<text x="15" y="130">    i;iG8888@@@@@@880000080f;ii:;;i.</text>
+<text x="15" y="150">   ,;;C88@@@@@@@@@@888888000L1;:,,;,</text>
+<text x="15" y="170">   .:i088GGCCG00GLLLLLCCG00GCC1i:,:</text>
+<text x="15" y="190">   :1f80CLffffCGLfttfttttLCCfLt;i11</text>
+<text x="15" y="210">   ,CC0CtLt1tfG8CfffLLLCCCG080Cffft:</text>
+<text x="15" y="230">    ,G880GG00C@@8G88@@@@@8@80GGLtt1;</text>
+<text x="15" y="250">     C@@@@@@8888GC0CG88000000GGLtfL;</text>
+<text x="15" y="270">     f88000CCfifti11fLCGGCGGGGLffCC,</text>
+<text x="15" y="290">     ;0GGGLit1iii1i11i:t0GCLLLfft.</text>
+<text x="15" y="310">     ,CCCGf:1tfCCLLt1ttiCLffffttt</text>
+<text x="15" y="330">      iffLCtG0Cf11i1fGCti1111iiif.</text>
+<text x="15" y="350">       i111tL88GLfLLGGt;::;::;itGt.</text>
+<text x="15" y="370">        ,:::;tLCGGCLf1;,,,,:;1fC0t;::...</text>
+<text x="15" y="390">          .,,,:;;;:::,,,,:;1fLCGf;i::;,1ti</text>
+<text x="15" y="410">           ,;;;::::;ii11tfLLCCL1:i;,::,;t1</text>
+<text x="15" y="430">      .,,;i:;;CLffLLLLCCCCCLLt;:;i;;f,,1t1</text>
+<text x="15" y="450">  .:i1;:;1tfi,tGLLLCCCCCCCCL1::;;::;;::;i1</text>
+<text x="447" y="30">barun@paul —————————————————————————————————————————————————</text>
+<text x="447" y="50"><tspan class="dim">. </tspan><tspan class="key">OS</tspan>:<tspan class="dim"> ........................... </tspan><tspan class="value">macOS, Windows 11, Android</tspan></text>
+<text x="447" y="70"><tspan class="dim">. </tspan><tspan class="key">Host</tspan>:<tspan class="dim"> ..................................... </tspan><tspan class="value">NITTTR Kolkata</tspan></text>
+<text x="447" y="90"><tspan class="dim">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="dim"> ....... </tspan><tspan class="value">Research Scholar, Computer Science Teacher</tspan></text>
+<text x="447" y="110"><tspan class="dim">. </tspan><tspan class="key">IDE</tspan>:<tspan class="dim"> .................... </tspan><tspan class="value">VS Code, Jupyter, Android Studio</tspan></text>
+<text x="447" y="150"><tspan class="dim">. </tspan><tspan class="key">Languages.Programming</tspan>:<tspan class="dim"> ........... </tspan><tspan class="value">Python, C, C++, R, Java</tspan></text>
+<text x="447" y="170"><tspan class="dim">. </tspan><tspan class="key">Languages.Computer</tspan>:<tspan class="dim"> ............... </tspan><tspan class="value">HTML, CSS, LaTeX, JSON</tspan></text>
+<text x="447" y="190"><tspan class="dim">. </tspan><tspan class="key">Languages.Real</tspan>:<tspan class="dim"> ......................... </tspan><tspan class="value">English, Bengali</tspan></text>
+<text x="447" y="230"><tspan class="dim">. </tspan><tspan class="key">Research.Areas</tspan>:<tspan class="dim"> ....... </tspan><tspan class="value">AI, Deep Learning, LLM, Clustering</tspan></text>
+<text x="447" y="250"><tspan class="dim">. </tspan><tspan class="key">Research.Security</tspan>:<tspan class="dim"> ...................... </tspan><tspan class="value">Image Encryption</tspan></text>
+<text x="447" y="270"><tspan class="dim">. </tspan><tspan class="key">Hobbies</tspan>:<tspan class="dim"> .................. </tspan><tspan class="value">Robotics, Software Development</tspan></text>
+<text x="447" y="310">- Contact ——————————————————————————————————————————————————</text>
+<text x="447" y="330"><tspan class="dim">. </tspan><tspan class="key">Email.Personal</tspan>:<tspan class="dim"> ................ </tspan><tspan class="value">barunkrpaul.cse@gmail.com</tspan></text>
+<text x="447" y="350"><tspan class="dim">. </tspan><tspan class="key">GitHub</tspan>:<tspan class="dim"> ...................................... </tspan><tspan class="value">barunkrpaul</tspan></text>
+<text x="447" y="370"><tspan class="dim">. </tspan><tspan class="key">LinkedIn</tspan>:<tspan class="dim"> ........................ </tspan><tspan class="value">barun-kr-paul-228b10102</tspan></text>
+<text x="447" y="410">- GitHub Stats —————————————————————————————————————————————</text>
+<text x="447" y="430"><tspan class="dim">. </tspan><tspan class="key">Repos</tspan>:<tspan class="dim"> ..... </tspan><tspan class="value">25</tspan> {<tspan class="key">Contributed</tspan>: <tspan class="value">30</tspan>} | <tspan class="key">Stars</tspan>:<tspan class="dim"> ............. </tspan><tspan class="value">1</tspan></text>
+<text x="447" y="450"><tspan class="dim">. </tspan><tspan class="key">Commits</tspan>:<tspan class="dim"> ..................... </tspan><tspan class="value">71</tspan> | <tspan class="key">Followers</tspan>:<tspan class="dim"> ......... </tspan><tspan class="value">1</tspan></text>
+</g>
+</svg>

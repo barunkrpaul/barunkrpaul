@@ -1,0 +1,43 @@
+{
+  "github_username": "barunkrpaul",
+  "header": "barun@paul",
+
+  "crop": [0.24, 0.03, 0.76, 0.50],
+  "ascii_width": 42,
+  "outline": 0.15,
+  "info_width": 60,
+
+  "sections": [
+    {
+      "lines": {
+        "OS": "macOS, Windows 11, Android",
+        "Host": "NITTTR Kolkata",
+        "Kernel": "Research Scholar, Computer Science Teacher",
+        "IDE": "VS Code, Jupyter, Android Studio"
+      }
+    },
+    {
+      "lines": {
+        "Languages.Programming": "Python, C, C++, R, Java",
+        "Languages.Computer": "HTML, CSS, LaTeX, JSON",
+        "Languages.Real": "English, Bengali"
+      }
+    },
+    {
+      "lines": {
+        "Research.Areas": "AI, Deep Learning, LLM, Clustering",
+        "Research.Security": "Image Encryption",
+        "Hobbies": "Robotics, Software Development"
+      }
+    },
+    {
+      "title": "Contact",
+      "lines": {
+        "Email.Personal": "barunkrpaul.cse@gmail.com",
+        "GitHub": "barunkrpaul",
+        "LinkedIn": "barun-kr-paul-228b10102"
+      }
+    }
+  ],
+  "show_stats": true
+}
