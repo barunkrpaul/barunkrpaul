@@ -8,8 +8,8 @@ const l2 = split(tagline.line2, l1.length + 2);
 <section class="hero" data-hero>
   <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
   <canvas class="field" data-hero-canvas aria-hidden="true"></canvas>
-  <div class="centroid-label" data-centroid-label="0" aria-hidden="true"><img src={people[0].face} alt="" width="26" height="26" />{people[0].first}</div>
-  <div class="centroid-label" data-centroid-label="1" aria-hidden="true"><img src={people[1].face} alt="" width="26" height="26" />{people[1].first}</div>
+  <div class="centroid-label" data-centroid-label="0" aria-hidden="true"><i></i>{people[0].first}</div>
+  <div class="centroid-label" data-centroid-label="1" aria-hidden="true"><i></i>{people[1].first}</div>
 
   <div class="wrap inner">
     <div class="chip status reveal"><span class="dot-live"></span>{availability} · Nadia, West Bengal</div>
@@ -77,9 +77,8 @@ const l2 = split(tagline.line2, l1.length + 2);
     background: color-mix(in srgb, var(--bg) 55%, transparent); backdrop-filter: blur(6px);
     will-change: transform;
   }
-  .centroid-label { padding-left: 4px; }
-  .centroid-label img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--cyan); box-shadow: 0 0 14px rgb(var(--glow-cyan) / 0.6); }
-  .centroid-label[data-centroid-label='1'] img { border-color: #a78bfa; box-shadow: 0 0 14px rgb(167 139 250 / 0.6); }
+  .centroid-label i { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+  .centroid-label[data-centroid-label='1'] i { background: #a78bfa; box-shadow: 0 0 12px #a78bfa; }
   .centroid-label.on { opacity: 1; }
 
   .scroll-cue {

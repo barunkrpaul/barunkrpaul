@@ -38,9 +38,8 @@ export interface Person {
   strengths: string[];
   links: { label: string; href: string }[];
   hue: 'cyan' | 'violet';
-  /** Card photo (4:3) and small round face, in public/people/. */
+  /** Full photo, in public/people/ (shown in the contact section). */
   photo: string;
-  face: string;
 }
 
 // TODO (Ujjal & Barun): confirm roles and bios, and send photos.
@@ -56,7 +55,6 @@ export const people: Person[] = [
     links: [{ label: 'GitHub', href: 'https://github.com/ujjalmca' }],
     hue: 'cyan',
     photo: '/people/ujjal.webp',
-    face: '/people/ujjal-face.webp',
   },
   {
     id: 'barun',
@@ -73,7 +71,6 @@ export const people: Person[] = [
     ],
     hue: 'violet',
     photo: '/people/barun.webp',
-    face: '/people/barun-face.webp',
   },
 ];
 
