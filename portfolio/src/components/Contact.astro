@@ -1,6 +1,6 @@
 ---
 import { people, contactEmail } from '../data/site';
-const types = ['Android app', 'Web platform', 'Live event / scoring system', 'NGO or education system', 'Dashboard or internal tool', 'Something else'];
+const types = ['Android app', 'Web platform', 'Live event / scoring system', 'NGO or education system', 'Business ERP or POS', 'Something else'];
 const budgets = ['Under ₹1 lakh', '₹1–3 lakh', '₹3–10 lakh', '₹10 lakh +', 'Not sure yet'];
 const timelines = ['As soon as possible', '1–3 months', '3–6 months', 'Flexible'];
 const direct = [
@@ -14,6 +14,20 @@ const direct = [
       <span class="eyebrow" data-scramble>Start a project</span>
       <h2>Let’s build <span class="grad-text">something great.</span></h2>
       <p>Answer three quick questions and add a few lines about your idea. Your email app opens with everything filled in, ready to send to us.</p>
+      <div class="team">
+        <span class="team-label">You’ll work directly with us</span>
+        <div class="faces">
+          {people.map((p) => (
+            <figure class:list={['face', p.hue]} data-hover>
+              <div class="ph">
+                <img class="fill" src={p.photo} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                <img class="photo" src={p.photo} alt={`Photo of ${p.name}`} loading="lazy" decoding="async" />
+              </div>
+              <figcaption><b>{p.name}</b><span>{p.role}</span></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
       <ul class="direct">
         {direct.map((d) => (
           <li><a href={d.href} target={d.href.startsWith('http') ? '_blank' : undefined} rel="noopener" data-hover><span>{d.label}</span><b>{d.value}</b><i aria-hidden="true">↗</i></a></li>
@@ -52,7 +66,28 @@ const direct = [
 
 <style>
   .layout { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: start; }
-  .intro { display: grid; gap: 18px; position: sticky; top: 110px; }
+  .intro { display: grid; gap: 18px; }
+
+  /* The two of you, in full, beside the contact details */
+  .team { display: grid; gap: 12px; margin-top: 10px; }
+  .team-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); }
+  .faces { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .face { margin: 0; display: grid; gap: 10px; }
+  .face.cyan { --hue: var(--cyan); --hue-rgb: var(--glow-cyan); }
+  .face.violet { --hue: #a78bfa; --hue-rgb: var(--glow-violet); }
+  .ph {
+    position: relative; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden;
+    border: 1px solid var(--line-2); background: var(--bg-2);
+    transition: box-shadow 0.5s var(--ease), transform 0.5s var(--ease);
+  }
+  .ph img { position: absolute; inset: 0; width: 100%; height: 100%; transition: transform 1.2s var(--ease); }
+  .ph .photo { object-fit: contain; }
+  .ph .fill { object-fit: cover; filter: blur(26px) brightness(0.6) saturate(1.2); transform: scale(1.15); }
+  .face:hover .ph { transform: translateY(-4px); box-shadow: 0 0 0 1px rgb(var(--hue-rgb) / 0.7), 0 24px 60px -20px rgb(var(--hue-rgb) / 0.6); }
+  .face:hover .photo { transform: scale(1.03); }
+  figcaption { display: grid; gap: 2px; }
+  figcaption b { font-family: var(--font-display); font-weight: 600; font-size: 17px; letter-spacing: -0.01em; }
+  figcaption span { font-size: 12.5px; color: var(--hue); }
   .intro h2 { font-size: clamp(40px, 6vw, 76px); }
   .intro > p { color: var(--text-2); font-size: 17px; max-width: 460px; }
   .direct { list-style: none; margin: 18px 0 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
