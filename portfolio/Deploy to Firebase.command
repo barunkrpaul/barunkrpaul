@@ -1,14 +1,15 @@
 #!/bin/bash
 # Double-click in Finder to put the portfolio online at
-# https://portfolio-e1264.web.app
+# https://portfoliodp.web.app
 # (First time: right-click > Open, because macOS asks before running
 #  a downloaded script.)
 
 cd "$(dirname "$0")" || exit 1
 PROJECT="portfolio-e1264"
+SITE="portfoliodp"
 
 echo "=============================================="
-echo " Our Portfolio  ->  Firebase ($PROJECT)"
+echo " Our Portfolio  ->  https://$SITE.web.app"
 echo "=============================================="
 echo
 
@@ -40,8 +41,8 @@ echo "Uploading..."
 if firebase deploy --only hosting --project "$PROJECT"; then
   echo
   echo "Done. Your portfolio is live at:"
-  echo "   https://$PROJECT.web.app"
-  open "https://$PROJECT.web.app" 2>/dev/null
+  echo "   https://$SITE.web.app"
+  open "https://$SITE.web.app" 2>/dev/null
 else
   echo
   echo "Upload failed. Check that you signed in with the Google account"

@@ -21,7 +21,8 @@ A. FIRST TIME: PUT THE SITE ONLINE (about 10 minutes)
    Make sure you are signed in to Firebase with the Google account that
    owns it.
 
-2. Project ID: already set. .firebaserc points to  portfolio-e1264
+2. Project ID and site: already set. .firebaserc points to the project
+   portfolio-e1264, and firebase.json uploads to the site  portfoliodp
 
 3. Install the Firebase tools (skip if you already did this for
    Gymlive):
@@ -39,7 +40,7 @@ A. FIRST TIME: PUT THE SITE ONLINE (about 10 minutes)
        firebase deploy --only hosting )
 
 5. Open the address Firebase prints, e.g.
-       https://portfolio-e1264.web.app
+       https://portfoliodp.web.app
    That is your live portfolio.
 
 
