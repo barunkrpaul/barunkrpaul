@@ -311,7 +311,19 @@ function initIndexFilter() {
   });
 }
 
+function settleTitle() {
+  const h1 = document.querySelector<HTMLElement>('[data-hero-title]');
+  if (!h1) return;
+  const chars = h1.querySelectorAll('.ch');
+  const last = chars[chars.length - 1];
+  const done = () => h1.classList.add('settled');
+  last?.addEventListener('animationend', done, { once: true });
+  const t = setTimeout(done, 2600); // fallback if animationend never fires
+  cleanups.push(() => clearTimeout(t));
+}
+
 function initHero() {
+  settleTitle();
   const canvas = document.querySelector<HTMLCanvasElement>('[data-hero-canvas]');
   const hero = document.querySelector<HTMLElement>('[data-hero]');
   if (canvas && hero) cleanups.push(startField(canvas, hero));

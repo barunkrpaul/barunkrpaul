@@ -13,7 +13,7 @@ const l2 = split(tagline.line2, l1.length + 2);
 
   <div class="wrap inner">
     <div class="chip status reveal"><span class="dot-live"></span>{availability} · Nadia, West Bengal</div>
-    <h1 aria-label={`${tagline.line1} ${tagline.line2}`}>
+    <h1 data-hero-title aria-label={`${tagline.line1} ${tagline.line2}`}>
       <span class="line" aria-hidden="true">{l1.map((c) => <span class="ch" style={`--i:${c.i}`}>{c.ch}</span>)}</span>
       <span class="line grad-line" aria-hidden="true">{l2.map((c) => <span class="ch" style={`--i:${c.i}`}>{c.ch}</span>)}</span>
     </h1>
@@ -63,6 +63,9 @@ const l2 = split(tagline.line2, l1.length + 2);
     background-position: calc(var(--i) * 6%) 0;
   }
   @keyframes ch-in { to { opacity: 1; transform: none; filter: none; } }
+  /* Once the letters have arrived they become plain text (no animation or
+     filter layers left over the moving particles; Safari flickers otherwise). */
+  h1.settled .ch { animation: none; opacity: 1; transform: none; filter: none; }
 
   .lede { max-width: 560px; font-size: clamp(17px, 1.7vw, 20px); color: var(--text-2); margin-bottom: 36px; text-wrap: pretty; }
   .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
