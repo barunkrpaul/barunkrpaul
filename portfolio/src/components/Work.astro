@@ -1,7 +1,7 @@
 ---
 import Cover from './Cover.astro';
-import { projects } from '../data/projects';
-const [flagship, ...rest] = projects;
+import { featured, projects } from '../data/projects';
+const [flagship, ...rest] = featured;
 // Rows alternate 5+7 and 7+5 columns; the "your project next" card fills the gap.
 const span = (i: number) => (Math.floor(i / 2) % 2 === 0 ? [5, 7] : [7, 5])[i % 2];
 const nextSpan = rest.length % 2 === 0 ? 12 : 12 - span(rest.length - 1);
@@ -11,7 +11,7 @@ const nextSpan = rest.length % 2 === 0 ? 12 : 12 - span(rest.length - 1);
     <div class="section-head reveal">
       <span class="eyebrow" data-scramble>Selected work</span>
       <h2>Software people <span class="grad-text">rely on.</span></h2>
-      <p>From a state championship scored live to an NGO working in remote villages: products we planned, built and delivered together.</p>
+      <p>From a state championship scored live to an NGO working in remote villages: a few of the {projects.length} products we have planned, built and delivered.</p>
     </div>
 
     <div class="bento">
@@ -26,13 +26,13 @@ const nextSpan = rest.length % 2 === 0 ? 12 : 12 - span(rest.length - 1);
           </ul>
           <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
-        <Cover kind={flagship.cover} accent={flagship.accent} large />
+        <Cover kind={flagship.cover} accent={flagship.accent} label={flagship.title} large />
       </a>
 
       {rest.map((p, i) => (
         <a href={`/work/${p.slug}`} class:list={['card', 'reveal']} style={`--d:${(i % 2) * 0.08}s;--span:${span(i)}`} data-tilt data-hover>
           <div class="spot"></div>
-          <Cover kind={p.cover} accent={p.accent} />
+          <Cover kind={p.cover} accent={p.accent} label={p.title} />
           <div class="card-text">
             <div class="meta"><span class="chip">{p.category}</span>{p.year && <span class="chip">{p.year}</span>}<span class="chip status">{p.status}</span></div>
             <h3 transition:name={`title-${p.slug}`}>{p.title}</h3>

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Cover from '../../components/Cover.astro';
-import { projects, type Project } from '../../data/projects';
+import { projects, creditOf, type Project } from '../../data/projects';
 
 export function getStaticPaths() {
   return projects.map((p, i) => ({
@@ -23,6 +23,7 @@ const { project: p, next } = Astro.props;
         <span class="chip status"><span class="dot-live"></span>{p.status}</span>
       </div>
       <h1 transition:name={`title-${p.slug}`}>{p.title}</h1>
+      <p class="client reveal">Built for <b>{p.client}</b></p>
       <p class="summary reveal" style="--d:.1s">{p.summary}</p>
       {p.motto && <p class="motto reveal" style="--d:.15s">{p.motto}</p>}
       {p.links.length > 0 && (
@@ -37,15 +38,15 @@ const { project: p, next } = Astro.props;
     </header>
 
     <div class="wrap reveal" style="--d:.25s">
-      <Cover kind={p.cover} accent={p.accent} large />
+      <Cover kind={p.cover} accent={p.accent} label={p.title} tag={p.category} large />
     </div>
 
     {p.pending && (
       <section class="wrap soon reveal">
         <div class="soon-inner glass">
-          <span class="eyebrow">Full case study coming soon</span>
-          <p>We are preparing the screenshots and the full story behind {p.title}. Want to hear about it now? We are happy to walk you through it.</p>
-          <a href="/#contact" class="btn btn-ghost" data-magnetic>Ask us about this project</a>
+          <span class="eyebrow">Walkthrough on request</span>
+          <p>We are still writing up the full story behind {p.title}. Want to see it? We are happy to give you a live walkthrough.</p>
+          <a href="/#contact" class="btn btn-ghost" data-magnetic>Ask for a walkthrough</a>
         </div>
       </section>
     )}
@@ -86,7 +87,7 @@ const { project: p, next } = Astro.props;
 
     <section class="wrap block">
       <span class="eyebrow reveal" data-scramble>Who built it</span>
-      <p class="lead reveal">Designed, built and delivered by Ujjal Kumar Das and Barun Kr Paul.</p>
+      <p class="lead reveal">{creditOf(p)}</p>
     </section>
 
     <a href={`/work/${next.slug}`} class="next wrap" data-hover>
@@ -106,6 +107,8 @@ const { project: p, next } = Astro.props;
   .chip.status { color: #34d399; border-color: rgb(52 211 153 / 0.3); }
   h1 { font-size: clamp(54px, 10vw, 150px); letter-spacing: -0.055em; line-height: 0.92; background: linear-gradient(100deg, var(--text) 30%, var(--a1) 70%, var(--a2)); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: 0.06em; }
   .summary { font-size: clamp(18px, 2vw, 24px); color: var(--text-2); max-width: 820px; text-wrap: pretty; }
+  .client { color: var(--text-3); font-size: 15px; margin-top: -6px; }
+  .client b { color: var(--text); font-weight: 500; }
   .motto { font-family: var(--font-mono); font-size: 14px; color: var(--a1); }
   .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
 

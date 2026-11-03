@@ -1,0 +1,81 @@
+---
+// Every project in one filterable list, after the illustrated "Selected work".
+import { projects, groups } from '../data/projects';
+const counts = Object.fromEntries(groups.map((g) => [g, projects.filter((p) => p.group === g).length]));
+const statusClass = (s: string) =>
+  s === 'Live' || s === 'In production' ? 'live' : s === 'Delivered' || s === 'Public releases' ? 'done' : s === 'Prototype' ? 'proto' : 'dev';
+---
+<section class="section index" id="index">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-scramble>The full index</span>
+      <h2>Everything we’ve built, <span class="grad-text">{projects.length} and counting.</span></h2>
+      <p>Live platforms, college tools, business software and apps, all from 2025–26. Filter by type, or open any project for the details.</p>
+    </div>
+
+    <div class="filters reveal" role="tablist" aria-label="Filter projects" data-filters>
+      <button role="tab" aria-selected="true" data-filter="all">All <span>{projects.length}</span></button>
+      {groups.map((g) => <button role="tab" aria-selected="false" data-filter={g}>{g} <span>{counts[g]}</span></button>)}
+    </div>
+
+    <ol class="list" data-index-list>
+      {projects.map((p, i) => (
+        <li data-group={p.group} style={`--a1:${p.accent[0]};--a2:${p.accent[1]}`}>
+          <a href={`/work/${p.slug}`} data-hover>
+            <span class="n">{String(i + 1).padStart(2, '0')}</span>
+            <span class="t">
+              <b>{p.title}</b>
+              <small>{p.client}</small>
+            </span>
+            <span class="c">{p.category}</span>
+            <span class:list={['s', statusClass(p.status)]}>{p.status}</span>
+            <span class="go" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .filters button { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; border: 1px solid var(--line-2); font-size: 14px; color: var(--text-2); transition: all 0.25s var(--ease); }
+  .filters button span { font-family: var(--font-mono); font-size: 11px; color: var(--text-3); }
+  .filters button:hover { color: var(--text); border-color: var(--text-3); }
+  .filters button[aria-selected='true'] { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .filters button[aria-selected='true'] span { color: var(--bg); opacity: 0.6; }
+
+  .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .list li { border-bottom: 1px solid var(--line); }
+  .list li[hidden] { display: none; }
+  .list a {
+    position: relative; display: grid; grid-template-columns: 44px minmax(0, 1.4fr) minmax(0, 1fr) 140px 24px;
+    align-items: center; gap: 18px; padding: 20px 8px; overflow: hidden; isolation: isolate;
+    transition: padding 0.4s var(--ease);
+  }
+  .list a::before {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--a1) 14%, transparent), color-mix(in srgb, var(--a2) 6%, transparent) 60%, transparent);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease);
+  }
+  .list a:hover { padding-left: 20px; }
+  .list a:hover::before { transform: scaleX(1); }
+  .n { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+  .t { display: grid; gap: 2px; min-width: 0; }
+  .t b { font-family: var(--font-display); font-weight: 600; font-size: clamp(19px, 2vw, 24px); letter-spacing: -0.02em; }
+  .t small { color: var(--text-3); font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .c { color: var(--text-2); font-size: 14px; }
+  .s { justify-self: start; font-family: var(--font-mono); font-size: 11px; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--line-2); color: var(--text-2); white-space: nowrap; }
+  .s.live { color: #34d399; border-color: rgb(52 211 153 / 0.4); }
+  .s.done { color: var(--cyan); border-color: rgb(var(--glow-cyan) / 0.4); }
+  .s.proto { color: var(--amber); border-color: rgb(251 191 36 / 0.4); }
+  .s.dev { color: #a78bfa; border-color: rgb(167 139 250 / 0.4); }
+  .go { color: var(--text-3); transition: transform 0.4s var(--ease), color 0.3s; }
+  .list a:hover .go { transform: translateX(4px); color: var(--text); }
+
+  @media (max-width: 860px) {
+    .list a { grid-template-columns: 34px minmax(0, 1fr) auto; gap: 6px 14px; padding: 16px 4px; }
+    .c { display: none; }
+    .go { display: none; }
+  }
+</style>

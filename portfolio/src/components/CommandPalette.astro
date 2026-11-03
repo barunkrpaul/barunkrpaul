@@ -1,15 +1,16 @@
 ---
-import { projects } from '../data/projects';
+import { featured, projects } from '../data/projects';
 import { brands, people, contactEmail } from '../data/site';
 
 // Every command the palette knows. `run` is read by scripts/palette.ts.
 const commands = [
   { group: 'Go to', label: 'Selected work', hint: 'section', run: 'go:/#work' },
+  { group: 'Go to', label: `Everything we’ve built (${projects.length})`, hint: 'section', run: 'go:/#index' },
   { group: 'Go to', label: 'The Duo', hint: 'section', run: 'go:/#duo' },
   { group: 'Go to', label: 'Services', hint: 'section', run: 'go:/#services' },
   { group: 'Go to', label: 'How we work', hint: 'section', run: 'go:/#process' },
   { group: 'Go to', label: 'Start a project', hint: 'section', run: 'go:/#contact' },
-  ...projects.map((p) => ({ group: 'Projects', label: p.title, hint: p.category, run: `go:/work/${p.slug}` })),
+  ...featured.map((p) => ({ group: 'Projects', label: p.title, hint: p.category, run: `go:/work/${p.slug}` })),
   { group: 'Actions', label: 'Switch light / dark theme', hint: 'theme', run: 'theme' },
   { group: 'Actions', label: `Copy email (${contactEmail})`, hint: 'copy', run: `copy:${contactEmail}` },
   ...brands.map((b) => ({ group: 'Name preview', label: `Show the site as “${b.name}”`, hint: 'brand', run: `brand:${b.id}` })),
@@ -19,7 +20,7 @@ const commands = [
 ];
 const terminalData = {
   people: people.map((p) => ({ id: p.id, name: p.name, role: p.role, strengths: p.strengths })),
-  projects: projects.map((p) => p.title),
+  projects: featured.map((p) => p.title).concat(`…and ${projects.length - featured.length} more`),
 };
 ---
 <div class="palette" data-palette hidden transition:persist="palette">

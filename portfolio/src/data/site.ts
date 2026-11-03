@@ -24,7 +24,7 @@ export const showBrandSwitcher = true;
 export const tagline = { line1: 'Two minds.', line2: 'One build.' };
 
 export const intro =
-  'We are Ujjal and Barun, a two-person software team. We design and ship Android apps, web platforms and NGO systems that real people use every day, from the first sketch to the launch and beyond.';
+  'We are Ujjal and Barun, from the Department of Computer Science at Srikrishna College, Bagula. Together we design and ship live platforms, college and NGO systems, business software and Android apps that real people use every day.';
 
 export const availability = 'Open to new projects';
 
@@ -47,9 +47,9 @@ export const people: Person[] = [
     name: 'Ujjal Kumar Das',
     first: 'Ujjal',
     initials: 'UKD',
-    role: 'Mobile & Full-Stack Engineer',
-    bio: 'Builds Android apps and the systems behind them: data pipelines, cloud backends, signed releases and the small details that make an app feel fast.',
-    strengths: ['Android · Kotlin', 'Firebase & cloud', 'Release engineering', 'Data pipelines'],
+    role: 'Systems Builder & CS Educator',
+    bio: 'Builds the offline-first suites and administration systems a college runs on, from an eight-module college suite to attendance and teaching software, plus the Android and cloud work behind them.',
+    strengths: ['Offline-first apps', 'College administration', 'Android · Kotlin', 'Teaching software'],
     links: [{ label: 'GitHub', href: 'https://github.com/ujjalmca' }],
     hue: 'cyan',
   },
@@ -58,9 +58,9 @@ export const people: Person[] = [
     name: 'Barun Kr Paul',
     first: 'Barun',
     initials: 'BKP',
-    role: 'Full-Stack Developer & CS Educator',
-    bio: 'Turns real problems from classrooms, NGOs and finance into clear, usable products, and has spent years teaching computer science, so he explains things well too.',
-    strengths: ['Product design', 'Web platforms', 'Python · Java · C++', 'Education tech'],
+    role: 'Product Engineer & CS Educator',
+    bio: 'Turns real problems from classrooms, shops, sports councils and finance into clear, usable products, and runs the hosting, data and launches that keep them live.',
+    strengths: ['Live platforms', 'Firebase & Supabase', 'Product design', 'Launch & hosting'],
     links: [
       { label: 'GitHub', href: 'https://github.com/barunkrpaul' },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/barun-kr-paul-228b10102' },
@@ -84,8 +84,8 @@ export const services = [
     icon: 'globe',
   },
   {
-    title: 'NGO & education systems',
-    body: 'Attendance, assessments, field monitoring and reports for organisations working in low-connectivity areas.',
+    title: 'College, school & NGO systems',
+    body: 'Leave, exam duty, timetables, promotion files, attendance and field monitoring, built around the rules you actually follow.',
     icon: 'leaf',
   },
   {
@@ -94,8 +94,8 @@ export const services = [
     icon: 'pulse',
   },
   {
-    title: 'Dashboards & internal tools',
-    body: 'Turn spreadsheets and scattered data into one live view your whole team can trust.',
+    title: 'Business ERPs & point of sale',
+    body: 'Stock and billing for shops, bookings for hotels and clinics, and ERPs for travel firms, contractors and agencies.',
     icon: 'chart',
   },
   {
@@ -116,13 +116,13 @@ export const process = [
 export const tech = {
   Mobile: ['Kotlin', 'Jetpack Compose', 'Material 3', 'Room', 'WorkManager', 'Android Keystore'],
   Web: ['TypeScript', 'React', 'Next.js', 'Vite', 'Tailwind CSS', 'PWA'],
-  Backend: ['Firebase', 'Supabase', 'Prisma', 'PostgreSQL', 'FastAPI', 'Python'],
-  Cloud: ['Vercel', 'GitHub Actions', 'Docker', 'Oracle Cloud'],
+  Backend: ['Firebase', 'Supabase', 'PostgreSQL', 'Prisma', 'Django', 'Apps Script'],
+  Cloud: ['Vercel', 'Cloudflare Workers', 'GitHub Actions', 'Docker'],
 };
 
 export const stats = [
-  { value: projects.length, suffix: '', label: 'products built and delivered' },
-  { value: 1, suffix: '', label: 'state championship scored live' },
+  { value: projects.length, suffix: '', label: 'products and tools built' },
+  { value: projects.filter((p) => p.status === 'Live').length, suffix: '', label: 'platforms live on the public web' },
+  { value: 2000, suffix: '', label: 'live viewers our results platform is built for' },
   { value: 15, suffix: '', label: 'NGO learning centres on our platform' },
-  { value: 9, suffix: '', label: 'IPO registrars integrated' },
 ];

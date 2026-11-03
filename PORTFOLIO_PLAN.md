@@ -93,24 +93,42 @@ Extra pages:
 
 ---
 
-## 5. Project inventory (draft from GitHub, please confirm)
+## 5. Project inventory
 
-| Project | What it is | Stack | How to show it |
-|---|---|---|---|
-| **IPO One** | Android app: six-stage IPO lifecycle dashboard, calendar, allotment checks across 9 registrars, Family Apply, reminders, themes | Kotlin, Material 3, Firebase/Firestore, WorkManager, Android Keystore | Flagship case study. Use **dummy PAN/UPI data** in every screenshot. |
-| **AVK: Adivasi Vidyacharcha Kendra** | NGO education management, assessment and remote-monitoring platform for tribal children in Jungle Mahal, West Bengal | TypeScript | Flagship **social-impact** case study |
-| **Question Paper Portal** | Previous-year university question papers with contributions, admin review and bulk import | JavaScript, Vercel | Live demo (already deployed) |
-| **Gymlive 2026** ★ flagship | Live scoring and results system for the 70th West Bengal State School Games in Gymnastics 2026: judge scoring for MAG, WAG, Rhythmic and Acrobatic (U14/17/19), public results page, giant venue display with up to 8 hall cameras, Chief Judge approvals, audit trail, certificates | JavaScript, Firebase Realtime Database, Firebase Auth and Hosting, Web Crypto | **Flagship case study.** No photos of athletes (minors) without written consent, and no government emblems. |
-| **PackMate** | Tour companion web app for a college department's educational tour to Sikkim: access-code sign-in, tickets, packing checklist, itinerary, announcements, expenses, shared photo gallery, works offline | HTML/JS, Tailwind, Leaflet, Google Apps Script, Sheets & Drive, GitHub Pages | Case study (no traveller names or data) |
-| **Staff Leave Portal** | Leave management for a college's teaching and office staff: 3-step apply, HOD → Principal approvals, 6 leave types, office ledger | React, TypeScript, Vite | Case study, marked *Prototype* |
-| **Hotel D'Avana**, **Transfer Portal**, **Exam Management Portal** | Details still needed | | Cards with "case study coming soon" |
-| **Contact intelligence platform** (Fox & Mandal) | Internal platform; the repo is marked *confidential* | Python | **Only with written permission.** Even then, anonymise it ("for a leading law firm") and use no real data. |
-| **Exam-Duty** (Ujjal) | *Description needed* | | To decide |
+The site lists **26 projects**, sourced from the shared "Software Portfolio:
+Ujjal Kumar Das & Barun Kr Paul" document (3 Nov 2026), the repositories and
+earlier build sessions. The full data, one entry per project, lives in
+`portfolio/src/data/projects.ts`.
 
-**Left out (research / PhD or personal):** GeoClusterLab, CCKM / OCKM /
-OCKM-T, DNAK and CDK k-means, the clustering benchmark, the ADN review, the
-image-encryption repos, Heusler alloy ML, Lung CT U-Net, `publications`,
-`sikkim-tour`, `CSDataScience` and the profile README repo.
+- **10 featured with illustrated case studies:** Gymlive 2026 (flagship),
+  IPO One, AVK Platform, Question Paper Portal, HSMS (hardware store),
+  Mutual Transfer Portal, D'Avana Hotel PMS, Leave Management System,
+  Examination Duty Register, PackMate.
+- **16 more in the "Everything we've built" index**, each with its own page:
+  SKC College Suite, CAS Navigator, RoutineHub, TC Committee Manager,
+  Attendly, CampusCore ERP, CampusOne ERP, EduSphere School ERP, WB Government
+  School ERP, DentDesk, Himalaya360 Travel ERP, HSMS Commercial, Interior
+  Studio CRM, Aya Centre Manager, Contractor360 ERP, Animated Lecture Series.
+
+**Left out on purpose:** PhD and research work (GeoClusterLab, the k-means
+and image-encryption repos, Heusler ML, Lung CT U-Net, Geometry Research
+Ledger), TradeLab India (only a brief exists), UGCollegeSpace (not live),
+Family Records Vault (personal), the Fox & Mandal platform (confidential),
+and the profile README repo. Each is one entry away from being added.
+
+**Still to confirm before launch** (from the document's own gaps list):
+- [ ] Who did what on each project. The site credits both of you unless the
+      notes name one person: SKC College Suite, Attendly and the lecture series
+      are credited to Ujjal.
+- [ ] Permission to name clients publicly (Mandal Hardware is shown
+      unnamed; D'Avana is named because you asked for it).
+- [ ] Question Paper Portal: restore the papers on the new database, then add
+      the live link back.
+- [ ] Real usage numbers (transfer-portal registrations, Gymlive page views,
+      paper downloads).
+- [ ] Module lists for Contractor360 and the Government School ERP (their
+      pages offer a walkthrough instead).
+- [ ] Whether to mention AI-assisted development.
 
 ---
 

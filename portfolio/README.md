@@ -47,10 +47,10 @@ for the available illustrations.
 
 - `/`: hero, numbers, selected work, the duo, services, process, toolkit,
   contact brief builder
-- `/work/<slug>`: one case study per project in `src/data/projects.ts`
-  (Gymlive 2026, IPO One, AVK, Question Paper Portal, PackMate, Staff Leave
-  Portal, Hotel D’Avana, Transfer Portal, Exam Management Portal). Projects
-  marked `pending: true` show a "Full case study coming soon" panel.
+- `/work/<slug>`: one case-study page per project in `src/data/projects.ts`
+  (26 at present). Projects marked `featured: true` also appear in the
+  illustrated "Selected work" grid; every project appears in the "Everything
+  we've built" index with category filters.
 - `/404`: page not found
 
 ## Hosting

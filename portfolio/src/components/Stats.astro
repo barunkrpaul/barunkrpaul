@@ -14,7 +14,7 @@ const words = ['Android apps', 'Live scoring systems', 'Web platforms', 'NGO tec
   <div class="wrap grid">
     {stats.map((s, i) => (
       <div class="stat reveal" style={`--d:${i * 0.08}s`}>
-        <b data-count={s.value}>{s.value}</b><span class="suffix">{s.suffix}</span>
+        <b data-count={s.value}>{s.value.toLocaleString("en-IN")}</b><span class="suffix">{s.suffix}</span>
         <p>{s.label}</p>
       </div>
     ))}

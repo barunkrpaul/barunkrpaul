@@ -145,7 +145,7 @@ function countUp(el: HTMLElement) {
   const tick = (now: number) => {
     const t = Math.min(1, (now - start) / dur);
     const eased = 1 - Math.pow(1 - t, 4);
-    el.textContent = String(Math.round(target * eased));
+    el.textContent = Math.round(target * eased).toLocaleString('en-IN');
     if (t < 1) requestAnimationFrame(tick);
   };
   el.textContent = '0';
@@ -287,6 +287,19 @@ function initBrief() {
   });
 }
 
+function initIndexFilter() {
+  const bar = document.querySelector<HTMLElement>('[data-filters]');
+  const list = document.querySelector<HTMLElement>('[data-index-list]');
+  if (!bar || !list) return;
+  bar.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-filter]');
+    if (!btn) return;
+    const f = btn.dataset.filter!;
+    bar.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+    list.querySelectorAll<HTMLElement>('li').forEach((li) => { li.hidden = f !== 'all' && li.dataset.group !== f; });
+  });
+}
+
 function initHero() {
   const canvas = document.querySelector<HTMLCanvasElement>('[data-hero-canvas]');
   const hero = document.querySelector<HTMLElement>('[data-hero]');
@@ -302,6 +315,7 @@ function initPage() {
   initProgressRail();
   initAscii();
   initBrief();
+  initIndexFilter();
   initHero();
 }
 
