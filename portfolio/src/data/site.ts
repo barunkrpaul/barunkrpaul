@@ -1,3 +1,5 @@
+import { projects } from './projects';
+
 // Everything a visitor reads that is not a project lives here.
 // Edit this file to change names, bios, services or contact details.
 
@@ -119,7 +121,7 @@ export const tech = {
 };
 
 export const stats = [
-  { value: 4, suffix: '', label: 'products shipped and in use' },
+  { value: projects.length, suffix: '', label: 'products built and delivered' },
   { value: 1, suffix: '', label: 'state championship scored live' },
   { value: 15, suffix: '', label: 'NGO learning centres on our platform' },
   { value: 9, suffix: '', label: 'IPO registrars integrated' },

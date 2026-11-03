@@ -19,7 +19,7 @@ const { project: p, next } = Astro.props;
       <div class="meta reveal">
         {p.flagship && <span class="chip flag">★ Flagship</span>}
         <span class="chip">{p.category}</span>
-        <span class="chip">{p.year}</span>
+        {p.year && <span class="chip">{p.year}</span>}
         <span class="chip status"><span class="dot-live"></span>{p.status}</span>
       </div>
       <h1 transition:name={`title-${p.slug}`}>{p.title}</h1>
@@ -40,11 +40,21 @@ const { project: p, next } = Astro.props;
       <Cover kind={p.cover} accent={p.accent} large />
     </div>
 
-    <section class="wrap metrics" aria-label="Key numbers">
+    {p.pending && (
+      <section class="wrap soon reveal">
+        <div class="soon-inner glass">
+          <span class="eyebrow">Full case study coming soon</span>
+          <p>We are preparing the screenshots and the full story behind {p.title}. Want to hear about it now? We are happy to walk you through it.</p>
+          <a href="/#contact" class="btn btn-ghost" data-magnetic>Ask us about this project</a>
+        </div>
+      </section>
+    )}
+
+    {p.metrics.length > 0 && <section class="wrap metrics" aria-label="Key numbers">
       {p.metrics.map((m, i) => (
         <div class="metric reveal" style={`--d:${i * 0.08}s`}><b>{m.value}</b><span>{m.label}</span></div>
       ))}
-    </section>
+    </section>}
 
     {p.problem && (
       <section class="wrap block">
@@ -104,6 +114,9 @@ const { project: p, next } = Astro.props;
   .metric b { font-family: var(--font-display); font-weight: 600; font-size: clamp(44px, 5.6vw, 72px); letter-spacing: -0.05em; line-height: 1; background: linear-gradient(120deg, var(--a1), var(--a2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .metric span { color: var(--text-2); }
 
+  .soon { margin-top: 56px; }
+  .soon-inner { display: grid; gap: 18px; justify-items: start; padding: clamp(26px, 4vw, 44px); border-style: dashed; }
+  .soon-inner p { font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 28px); line-height: 1.35; letter-spacing: -0.02em; max-width: 820px; }
   .block { display: grid; gap: 24px; margin-top: clamp(80px, 10vw, 130px); }
   .lead { font-family: var(--font-display); font-size: clamp(24px, 3.2vw, 40px); line-height: 1.25; letter-spacing: -0.025em; max-width: 980px; text-wrap: pretty; }
   .highlights { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }

@@ -5,6 +5,7 @@ export interface Project {
   slug: string;
   title: string;
   category: string;
+  /** Leave empty to hide the year chip. */
   year: string;
   status: string;
   flagship?: boolean;
@@ -16,7 +17,7 @@ export interface Project {
   metrics: { value: string; label: string }[];
   stack: string[];
   links: { label: string; href: string }[];
-  cover: 'pulse' | 'phone' | 'dashboard' | 'papers';
+  cover: 'pulse' | 'phone' | 'dashboard' | 'papers' | 'hotel' | 'transfer' | 'exam';
   accent: [string, string];
   motto?: string;
 }
@@ -138,5 +139,53 @@ export const projects: Project[] = [
     links: [{ label: 'Visit the live site', href: 'https://question-paper-portal-henna.vercel.app' }],
     cover: 'papers',
     accent: ['#A78BFA', '#F472B6'],
+  },
+  // TODO (Ujjal & Barun): for each project below send what it does, who it is
+  // for, the main features, the stack, the year, screenshots and any live link.
+  // Until then the page shows "Full case study coming soon".
+  {
+    slug: 'hotel-davana',
+    title: 'Hotel D’Avana',
+    category: 'Hospitality',
+    year: '',
+    status: 'Delivered',
+    pending: true,
+    summary: 'Software we designed and built for Hotel D’Avana.',
+    highlights: [],
+    metrics: [],
+    stack: [],
+    links: [],
+    cover: 'hotel',
+    accent: ['#E0B872', '#F472B6'],
+  },
+  {
+    slug: 'transfer-portal',
+    title: 'Transfer Portal',
+    category: 'Web portal',
+    year: '',
+    status: 'Delivered',
+    pending: true,
+    summary: 'An online transfer portal, designed, built and delivered by the two of us.',
+    highlights: [],
+    metrics: [],
+    stack: [],
+    links: [],
+    cover: 'transfer',
+    accent: ['#38BDF8', '#818CF8'],
+  },
+  {
+    slug: 'exam-management-portal',
+    title: 'Exam Management Portal',
+    category: 'Web portal',
+    year: '',
+    status: 'Delivered',
+    pending: true,
+    summary: 'A web portal for managing examinations, built and delivered by the two of us.',
+    highlights: [],
+    metrics: [],
+    stack: [],
+    links: [],
+    cover: 'exam',
+    accent: ['#FB923C', '#FBBF24'],
   },
 ];
