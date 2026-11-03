@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 
-// Set `site` to the final domain once it is chosen (used for canonical URLs and the sitemap).
+// Change `site` if you move to your own domain.
 export default defineConfig({
+  site: 'https://portfolio-e1264.web.app',
   output: 'static',
   trailingSlash: 'ignore',
 });

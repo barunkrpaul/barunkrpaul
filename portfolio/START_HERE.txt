@@ -17,18 +17,11 @@ README.md        Developer notes.
 
 A. FIRST TIME: PUT THE SITE ONLINE (about 10 minutes)
 ---------------------------------------------------------------------
-1. Create the Firebase project
-   - Open https://console.firebase.google.com and sign in with the
-     Google account that should own the site.
-   - Add project. Name it, for example:  our-portfolio
-     Firebase shows the Project ID under the name (for example
-     our-portfolio-1a2b3). Copy that Project ID.
-   - Google Analytics is not needed. The free Spark plan is enough.
+1. Firebase project: already created (portfolio-e1264).
+   Make sure you are signed in to Firebase with the Google account that
+   owns it.
 
-2. Put the Project ID in .firebaserc
-   Open .firebaserc in TextEdit and replace
-       REPLACE-WITH-YOUR-PROJECT-ID
-   with your Project ID. Save.
+2. Project ID: already set. .firebaserc points to  portfolio-e1264
 
 3. Install the Firebase tools (skip if you already did this for
    Gymlive):
@@ -37,14 +30,16 @@ A. FIRST TIME: PUT THE SITE ONLINE (about 10 minutes)
    - Terminal:   firebase login
      (use the same Google account as in step 1)
 
-4. Upload
-   In Terminal, go into this folder. The easiest way: type  cd  and a
-   space, drag this folder from Finder into the Terminal window, press
-   Return. Then:
-       firebase deploy --only hosting
+4. Upload: double-click  "Deploy to Firebase.command"  in this folder.
+   The very first time, macOS may refuse a downloaded script: right-click
+   it, choose Open, then Open again. A Terminal window opens, a browser
+   asks you to sign in to Google if needed, and the site is uploaded.
+
+   (Or by hand: in Terminal go into this folder and run
+       firebase deploy --only hosting )
 
 5. Open the address Firebase prints, e.g.
-       https://our-portfolio-1a2b3.web.app
+       https://portfolio-e1264.web.app
    That is your live portfolio.
 
 
@@ -57,6 +52,8 @@ Almost every word on the site is in two files:
 After editing:
    First time only, in this folder:   npm install
    Every time:                        npm run deploy
+   (or double-click "Deploy to Firebase.command": once node_modules
+    exists it rebuilds the site before uploading)
 (npm run deploy builds the site into dist/ and uploads it.)
 
 Tip: npm install creates a large node_modules folder. Inside Google
