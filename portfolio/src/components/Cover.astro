@@ -1,7 +1,7 @@
 ---
 // Illustrated covers for each project, drawn in HTML/CSS (no screenshots yet).
 // They show the shape of each product, with sample values only.
-interface Props { kind: 'pulse' | 'phone' | 'dashboard' | 'papers' | 'hotel' | 'transfer' | 'exam'; accent: [string, string]; large?: boolean }
+interface Props { kind: 'pulse' | 'phone' | 'dashboard' | 'papers' | 'hotel' | 'transfer' | 'exam' | 'tour' | 'leave'; accent: [string, string]; large?: boolean }
 const { kind, accent, large = false } = Astro.props;
 ---
 <div class:list={['cover', `cover-${kind}`, { large }]} style={`--a1:${accent[0]};--a2:${accent[1]}`} aria-hidden="true">
@@ -123,6 +123,37 @@ const { kind, accent, large = false } = Astro.props;
         ))}
       </div>
       <div class="sc-foot"><span class="avatar"></span><span class="avatar"></span><span class="avatar"></span><span class="mono dim">Schedule published</span></div>
+    </div>
+  )}
+
+  {kind === 'tour' && (
+    <div class="tour">
+      <svg class="mtn" viewBox="0 0 400 160" preserveAspectRatio="none">
+        <path class="m1" d="M0 160 L70 70 L110 105 L180 30 L240 95 L290 55 L400 140 L400 160 Z" />
+        <path class="m2" d="M0 160 L90 110 L150 135 L230 85 L320 120 L400 100 L400 160 Z" />
+        <path class="rt" d="M40 130 C 120 90, 170 120, 230 80 S 330 70, 360 60" />
+        <circle cx="40" cy="130" r="5" /><circle cx="230" cy="80" r="5" /><circle cx="360" cy="60" r="5" />
+      </svg>
+      <div class="tour-card">
+        <div class="tc-top"><b>Trip starts in</b><span class="mono dim">IST</span></div>
+        <div class="tc-count"><span>12<i>d</i></span><span>04<i>h</i></span><span>37<i>m</i></span></div>
+        <div class="tc-pack"><span class="mono">Packed</span><span class="tc-bar"><i></i></span><span class="mono">28 / 34</span></div>
+      </div>
+    </div>
+  )}
+
+  {kind === 'leave' && (
+    <div class="leave">
+      <div class="lv-card">
+        <div class="lv-head"><b>Casual leave · 2 days</b><span class="lv-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" /><circle class="v" cx="18" cy="18" r="15" /></svg><span>8</span></span></div>
+        <ol class="lv-steps">
+          <li class="done"><span></span>Applied</li>
+          <li class="done"><span></span>HOD recommended</li>
+          <li class="now"><span></span>Principal</li>
+        </ol>
+        <div class="lv-stamp">SANCTIONED</div>
+      </div>
+      <div class="lv-chips"><span>CL</span><span>EL</span><span>ML</span><span>CCL</span><span>OD</span></div>
     </div>
   )}
 
@@ -292,6 +323,41 @@ const { kind, accent, large = false } = Astro.props;
   .sc-foot { display: flex; align-items: center; gap: 4px; }
   .avatar { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--bg-2); background: linear-gradient(135deg, var(--a1), var(--a2)); margin-right: -8px; }
   .sc-foot .mono { margin-left: 16px; }
+
+  /* ---- Tour companion ---- */
+  .tour { position: relative; width: min(420px, 100%); height: 230px; }
+  .mtn { position: absolute; inset: auto 0 0 0; width: 100%; height: 150px; }
+  .mtn .m1 { fill: color-mix(in srgb, var(--a1) 14%, transparent); }
+  .mtn .m2 { fill: color-mix(in srgb, var(--a2) 12%, transparent); }
+  .mtn .rt { fill: none; stroke: var(--a1); stroke-width: 2; stroke-dasharray: 5 6; animation: dash 1.4s linear infinite; }
+  .mtn circle { fill: var(--a2); filter: drop-shadow(0 0 6px var(--a2)); }
+  .tour-card { position: absolute; left: 50%; top: 4px; translate: -50% 0; width: 250px; padding: 14px; border-radius: 16px; display: grid; gap: 10px; background: color-mix(in srgb, var(--bg) 85%, transparent); border: 1px solid var(--line-2); box-shadow: var(--shadow); }
+  .tc-top { display: flex; justify-content: space-between; font-family: var(--font-display); font-size: 14px; }
+  .tc-count { display: flex; gap: 8px; }
+  .tc-count span { flex: 1; text-align: center; padding: 8px 0; border-radius: 10px; background: var(--surface-2); font-family: var(--font-display); font-weight: 700; font-size: 22px; font-variant-numeric: tabular-nums; }
+  .tc-count i { font-style: normal; font-size: 11px; color: var(--text-3); margin-left: 2px; }
+  .tc-pack { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; color: var(--text-2); }
+  .tc-bar { height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+  .tc-bar i { display: block; height: 100%; width: 82%; border-radius: 3px; background: linear-gradient(90deg, var(--a1), var(--a2)); transform-origin: left; animation: grow-x 1.4s var(--ease) 0.3s both; }
+  @keyframes grow-x { from { transform: scaleX(0); } }
+
+  /* ---- Staff leave ---- */
+  .leave { width: min(330px, 100%); display: grid; gap: 12px; }
+  .lv-card { position: relative; overflow: hidden; padding: 18px; border-radius: 16px; display: grid; gap: 14px; background: color-mix(in srgb, var(--bg) 85%, transparent); border: 1px solid var(--line-2); box-shadow: var(--shadow); }
+  .lv-head { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-display); }
+  .lv-ring { position: relative; width: 38px; height: 38px; display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: 13px; }
+  .lv-ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+  .lv-ring circle { fill: none; stroke: var(--surface-2); stroke-width: 3.5; }
+  .lv-ring .v { stroke: var(--a1); stroke-dasharray: 94; stroke-dashoffset: 40; stroke-linecap: round; }
+  .lv-steps { list-style: none; margin: 0; padding: 0 0 0 4px; display: grid; gap: 10px; font-size: 13px; color: var(--text-2); }
+  .lv-steps li { display: flex; align-items: center; gap: 10px; }
+  .lv-steps li span { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--line-2); }
+  .lv-steps .done span { background: #34d399; border-color: #34d399; }
+  .lv-steps .now span { border-color: var(--a1); box-shadow: 0 0 0 4px color-mix(in srgb, var(--a1) 25%, transparent); }
+  .lv-stamp { position: absolute; right: 14px; bottom: 18px; padding: 4px 10px; border: 2px solid var(--a1); border-radius: 6px; color: var(--a1); font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; transform: rotate(-10deg); animation: stamp 3.5s var(--ease) infinite; }
+  @keyframes stamp { 0%, 30% { opacity: 0; transform: rotate(-10deg) scale(1.8); } 42%, 90% { opacity: 1; transform: rotate(-10deg) scale(1); } 100% { opacity: 0; transform: rotate(-10deg) scale(1); } }
+  .lv-chips { display: flex; gap: 6px; justify-content: center; }
+  .lv-chips span { font-family: var(--font-mono); font-size: 10.5px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line); color: var(--text-2); }
 
   @media (max-width: 560px) {
     .cover { padding: 18px; min-height: 230px; }

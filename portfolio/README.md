@@ -40,15 +40,17 @@ When you decide:
 
 Add an entry to `projects` in `src/data/projects.ts`. The home page card
 and the `/work/<slug>` case-study page are created from it automatically.
-Covers are drawn in code (`cover: 'pulse' | 'phone' | 'dashboard' |
-'papers'`).
+Covers are drawn in code; see the `cover` type in `src/data/projects.ts`
+for the available illustrations.
 
 ## Pages
 
 - `/`: hero, numbers, selected work, the duo, services, process, toolkit,
   contact brief builder
-- `/work/gymlive-2026`, `/work/ipo-one`, `/work/avk`,
-  `/work/question-paper-portal`: case studies
+- `/work/<slug>`: one case study per project in `src/data/projects.ts`
+  (Gymlive 2026, IPO One, AVK, Question Paper Portal, PackMate, Staff Leave
+  Portal, Hotel D’Avana, Transfer Portal, Exam Management Portal). Projects
+  marked `pending: true` show a "Full case study coming soon" panel.
 - `/404`: page not found
 
 ## Hosting

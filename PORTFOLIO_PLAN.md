@@ -101,6 +101,9 @@ Extra pages:
 | **AVK: Adivasi Vidyacharcha Kendra** | NGO education management, assessment and remote-monitoring platform for tribal children in Jungle Mahal, West Bengal | TypeScript | Flagship **social-impact** case study |
 | **Question Paper Portal** | Previous-year university question papers with contributions, admin review and bulk import | JavaScript, Vercel | Live demo (already deployed) |
 | **Gymlive 2026** ★ flagship | Live scoring and results system for the 70th West Bengal State School Games in Gymnastics 2026: judge scoring for MAG, WAG, Rhythmic and Acrobatic (U14/17/19), public results page, giant venue display with up to 8 hall cameras, Chief Judge approvals, audit trail, certificates | JavaScript, Firebase Realtime Database, Firebase Auth and Hosting, Web Crypto | **Flagship case study.** No photos of athletes (minors) without written consent, and no government emblems. |
+| **PackMate** | Tour companion web app for a college department's educational tour to Sikkim: access-code sign-in, tickets, packing checklist, itinerary, announcements, expenses, shared photo gallery, works offline | HTML/JS, Tailwind, Leaflet, Google Apps Script, Sheets & Drive, GitHub Pages | Case study (no traveller names or data) |
+| **Staff Leave Portal** | Leave management for a college's teaching and office staff: 3-step apply, HOD → Principal approvals, 6 leave types, office ledger | React, TypeScript, Vite | Case study, marked *Prototype* |
+| **Hotel D'Avana**, **Transfer Portal**, **Exam Management Portal** | Details still needed | | Cards with "case study coming soon" |
 | **Contact intelligence platform** (Fox & Mandal) | Internal platform; the repo is marked *confidential* | Python | **Only with written permission.** Even then, anonymise it ("for a leading law firm") and use no real data. |
 | **Exam-Duty** (Ujjal) | *Description needed* | | To decide |
 

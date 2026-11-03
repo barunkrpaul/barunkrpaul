@@ -17,7 +17,7 @@ export interface Project {
   metrics: { value: string; label: string }[];
   stack: string[];
   links: { label: string; href: string }[];
-  cover: 'pulse' | 'phone' | 'dashboard' | 'papers' | 'hotel' | 'transfer' | 'exam';
+  cover: 'pulse' | 'phone' | 'dashboard' | 'papers' | 'hotel' | 'transfer' | 'exam' | 'tour' | 'leave';
   accent: [string, string];
   motto?: string;
 }
@@ -139,6 +139,62 @@ export const projects: Project[] = [
     links: [{ label: 'Visit the live site', href: 'https://question-paper-portal-henna.vercel.app' }],
     cover: 'papers',
     accent: ['#A78BFA', '#F472B6'],
+  },
+  {
+    slug: 'packmate',
+    title: 'PackMate',
+    category: 'Tour companion app',
+    year: '2026',
+    status: 'Live',
+    summary:
+      'A mobile-first companion app for a college department’s educational tour to Sikkim: tickets, packing, itinerary, announcements, expenses and a shared photo gallery, all in one place.',
+    problem:
+      'Twenty-two travellers, three destinations and a mountain of tickets, berths, checklists and receipts. Everything lived in group chats, and personal details like phone numbers and PNRs were far too easy to see.',
+    highlights: [
+      'Access-code sign-in checked on the server: each traveller sees only their own ticket and berth',
+      'Faculty tools: traveller roster, priority announcements with an urgent banner, and an expense tracker with CSV export',
+      'Shared photo gallery on Google Drive with drag-and-drop uploads and likes',
+      'Packing checklist of 34 items in 6 categories that syncs across a student’s devices',
+      'Day-by-day itinerary with a downloadable PDF, a route map and a live countdown',
+      'Works offline in the hills: emergency contacts and key details stay available without a signal',
+    ],
+    metrics: [
+      { value: '22', label: 'Travellers' },
+      { value: '3', label: 'Destinations' },
+      { value: '44', label: 'Automated tests' },
+    ],
+    stack: ['HTML & JavaScript', 'Tailwind CSS', 'Leaflet', 'Google Apps Script', 'Google Sheets & Drive', 'PWA', 'GitHub Pages'],
+    links: [{ label: 'Open the app', href: 'https://barunkrpaul.github.io/sikkim-tour/' }],
+    cover: 'tour',
+    accent: ['#5EEAD4', '#A3E635'],
+  },
+  {
+    slug: 'staff-leave-portal',
+    title: 'Staff Leave Portal',
+    category: 'College administration',
+    year: '2026',
+    status: 'Prototype',
+    summary:
+      'A leave-management app for the teaching and office staff of a college: apply in three steps, see balances live, and move every request from HOD to Principal without paper.',
+    problem:
+      'Leave in a college runs on paper forms, registers and signatures across departments. Staff could not see their balances, and approvals waited on whoever held the file.',
+    highlights: [
+      'Apply in three steps; the days are held against your balance straight away',
+      'Approval flow: the HOD recommends, the Principal sanctions or refuses, and every step shows on a timeline',
+      'Casual, Earned, Medical, Child Care, Duty and Loss of Pay leave',
+      'Four roles in one app: Faculty, HOD, Principal and Office',
+      'Office ledger with search, opening balances and earned leave computed from the service record',
+      'Department calendar, notifications and a principal’s insights view',
+    ],
+    metrics: [
+      { value: '16', label: 'Screens' },
+      { value: '4', label: 'Roles' },
+      { value: '6', label: 'Leave types' },
+    ],
+    stack: ['React', 'TypeScript', 'Vite'],
+    links: [],
+    cover: 'leave',
+    accent: ['#C9A85C', '#60A5FA'],
   },
   // TODO (Ujjal & Barun): for each project below send what it does, who it is
   // for, the main features, the stack, the year, screenshots and any live link.
