@@ -322,6 +322,64 @@ function settleTitle() {
   cleanups.push(() => clearTimeout(t));
 }
 
+// Case pages: the big screenshot tilts into place when it scrolls into view.
+function initStage() {
+  const stage = document.querySelector<HTMLElement>('[data-stage]');
+  if (!stage) return;
+  if (reduced() || !('IntersectionObserver' in window)) { stage.classList.add('in'); return; }
+  const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { stage.classList.add('in'); io.disconnect(); } }, { threshold: 0.15 });
+  io.observe(stage);
+  cleanups.push(() => io.disconnect());
+}
+
+// Full-screen screenshot viewer: click a screenshot; arrows, Esc and swipe work.
+function initLightbox() {
+  const box = document.querySelector<HTMLElement>('[data-lightbox]');
+  const items = [...document.querySelectorAll<HTMLElement>('[data-lightbox-item]')];
+  if (!box || !items.length) return;
+  // The same screenshot can appear twice (hero and gallery); show each once.
+  const seen = new Set<string>();
+  const list = items.map((el) => ({ el, src: el.dataset.full!, cap: el.dataset.caption || '' }))
+    .filter((x) => (seen.has(x.src) ? false : (seen.add(x.src), true)));
+  const img = box.querySelector<HTMLImageElement>('[data-lb-img]')!;
+  const cap = box.querySelector<HTMLElement>('[data-lb-cap]')!;
+  let i = 0;
+  let last: HTMLElement | null = null;
+  const show = (n: number) => {
+    i = (n + list.length) % list.length;
+    img.src = list[i].src; img.alt = list[i].cap; cap.textContent = `${list[i].cap}  ·  ${i + 1} / ${list.length}`;
+  };
+  const open = (src: string, from: HTMLElement) => {
+    last = from; box.hidden = false; document.body.style.overflow = 'hidden';
+    show(Math.max(0, list.findIndex((x) => x.src === src)));
+    box.querySelector<HTMLElement>('[data-lb-close]')?.focus();
+  };
+  const close = () => { box.hidden = true; document.body.style.overflow = ''; last?.focus(); };
+  const onClick = (e: MouseEvent) => {
+    const t = e.target as HTMLElement;
+    const item = t.closest<HTMLElement>('[data-lightbox-item]');
+    if (item && item.closest('a') === null) { e.preventDefault(); open(item.dataset.full!, item); return; }
+    if (box.hidden) return;
+    if (t.closest('[data-lb-close]') || t === box) close();
+    else if (t.closest('[data-lb-prev]')) show(i - 1);
+    else if (t.closest('[data-lb-next]')) show(i + 1);
+  };
+  const onKey = (e: KeyboardEvent) => {
+    if (box.hidden) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') show(i - 1);
+    else if (e.key === 'ArrowRight') show(i + 1);
+  };
+  let sx = 0;
+  const onTs = (e: TouchEvent) => { sx = e.touches[0].clientX; };
+  const onTe = (e: TouchEvent) => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) show(i + (dx < 0 ? 1 : -1)); };
+  document.addEventListener('click', onClick);
+  document.addEventListener('keydown', onKey);
+  box.addEventListener('touchstart', onTs, { passive: true });
+  box.addEventListener('touchend', onTe);
+  cleanups.push(() => { document.removeEventListener('click', onClick); document.removeEventListener('keydown', onKey); document.body.style.overflow = ''; });
+}
+
 function initHero() {
   settleTitle();
   const canvas = document.querySelector<HTMLCanvasElement>('[data-hero-canvas]');
@@ -339,6 +397,8 @@ function initPage() {
   initAscii();
   initBrief();
   initIndexFilter();
+  initStage();
+  initLightbox();
   initHero();
 }
 

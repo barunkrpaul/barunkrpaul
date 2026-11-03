@@ -24,7 +24,7 @@ export const showBrandSwitcher = true;
 export const tagline = { line1: 'Two minds.', line2: 'One build.' };
 
 export const intro =
-  'We are Ujjal and Barun, from the Department of Computer Science at Srikrishna College, Bagula. Together we design and ship live platforms, college and NGO systems, business software and Android apps that real people use every day.';
+  'We are Ujjal and Barun, from the Department of Computer Science at Srikrishna College, Bagula. Together we design and ship live platforms, college and NGO systems, business software and mobile apps that real people use every day.';
 
 export const availability = 'Open to new projects';
 
@@ -78,8 +78,8 @@ export const contactEmail = 'barunkrpaul.cse@gmail.com';
 
 export const services = [
   {
-    title: 'Android apps',
-    body: 'Native Kotlin apps with Jetpack Compose: offline-first, encrypted where it matters, shipped as signed releases.',
+    title: 'Mobile & desktop apps',
+    body: 'Installable apps for phones, tablets and Windows: offline-first, quick to open, and encrypted where it matters.',
     icon: 'phone',
   },
   {
@@ -118,8 +118,8 @@ export const process = [
 ];
 
 export const tech = {
-  Mobile: ['Kotlin', 'Jetpack Compose', 'Material 3', 'Room', 'WorkManager', 'Android Keystore'],
-  Web: ['TypeScript', 'React', 'Next.js', 'Vite', 'Tailwind CSS', 'PWA'],
+  Mobile: ['PWA', 'Kotlin', 'Jetpack Compose', 'Electron', 'IndexedDB', 'Offline-first'],
+  Web: ['TypeScript', 'React', 'Next.js', 'Vite', 'Tailwind CSS', 'HTML & CSS'],
   Backend: ['Firebase', 'Supabase', 'PostgreSQL', 'Prisma', 'Django', 'Apps Script'],
   Cloud: ['Vercel', 'Cloudflare Workers', 'GitHub Actions', 'Docker'],
 };
@@ -127,6 +127,6 @@ export const tech = {
 export const stats = [
   { value: projects.length, suffix: '', label: 'products and tools built' },
   { value: projects.filter((p) => p.status === 'Live').length, suffix: '', label: 'platforms live on the public web' },
-  { value: 2000, suffix: '', label: 'live viewers our results platform is built for' },
+  { value: 206, suffix: '', label: 'athletes in the state championship we scored live' },
   { value: 15, suffix: '', label: 'NGO learning centres on our platform' },
 ];

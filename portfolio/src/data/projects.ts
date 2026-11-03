@@ -39,6 +39,8 @@ export interface Project {
   /** Who built it. Defaults to both. TODO (Ujjal & Barun): confirm each. */
   credit?: string;
   motto?: string;
+  /** Shown under the screenshot gallery heading. */
+  screensNote?: string;
 }
 
 const BOTH = 'Ujjal Kumar Das & Barun Kr Paul';
@@ -70,49 +72,15 @@ export const projects: Project[] = [
       'Three-step sign-in for officials (password, competition passphrase, 6-digit authenticator code) and encrypted data',
     ],
     metrics: [
+      { value: '206', label: 'Athletes registered' },
+      { value: '17', label: 'Districts' },
       { value: '4', label: 'Disciplines' },
       { value: '19', label: 'Apparatus & group events' },
-      { value: '2,000', label: 'Viewers at once, by design' },
-      { value: '4,000', label: 'Records supported' },
     ],
     stack: ['JavaScript', 'Firebase Realtime Database', 'Firebase Auth', 'Firebase Hosting', 'Web Crypto (AES-GCM)', 'YouTube Live'],
     links: [{ label: 'See the live results', href: 'https://gymlive2026.web.app' }],
     cover: 'pulse',
     accent: ['#FB7185', '#FBBF24'],
-  },
-  {
-    slug: 'ipo-one',
-    title: 'IPO One',
-    client: 'Retail IPO investors',
-    group: 'Apps & teaching',
-    category: 'Android app',
-    year: '2026',
-    status: 'Public releases',
-    featured: true,
-    summary:
-      'A privacy-first Android app for tracking IPOs and applying across a whole family’s demat accounts, with live GMP, subscription data and allotment checks in one place.',
-    problem:
-      'Families who apply for IPOs juggle several PANs, demat accounts, broker apps and registrar websites. Tracking dates, bids and allotments by hand is slow and easy to get wrong.',
-    highlights: [
-      'Six-stage IPO lifecycle (upcoming, open, closed, allotted, listed, cancelled) on one grouped dashboard',
-      'Live grey-market premium, issue size and category-wise subscription for QIB, NII and retail',
-      'Allotment checks across 9 registrars, with automatic retries and an honest “could not verify”',
-      'Family Apply: step through every member’s bid, each with their own encrypted broker session',
-      'IPO calendar, today’s events and reminders for opens, closes, listings and allotments',
-      'Automated, signed APK build attached to every GitHub release',
-    ],
-    metrics: [
-      { value: '9', label: 'Registrars integrated' },
-      { value: '6', label: 'Lifecycle stages' },
-      { value: 'AES-256', label: 'On-device encryption' },
-    ],
-    stack: ['Kotlin', 'Jetpack Compose', 'Material 3', 'Room', 'Firebase', 'WorkManager', 'GitHub Actions'],
-    links: [
-      { label: 'Download APK', href: 'https://github.com/barunkrpaul/IPO-One-V2/releases/latest' },
-      { label: 'Source on GitHub', href: 'https://github.com/barunkrpaul/IPO-One-V2' },
-    ],
-    cover: 'phone',
-    accent: ['#2DD4BF', '#38BDF8'],
   },
   {
     slug: 'avk',
@@ -145,6 +113,7 @@ export const projects: Project[] = [
     cover: 'dashboard',
     accent: ['#34D399', '#FBBF24'],
     motto: 'নিজেরাই শিখি নিজেরাই শেখাই · We learn and help our children learn',
+    screensNote: 'Screens from the demo build, with sample data. Names are placeholders.',
   },
   {
     slug: 'question-paper-portal',
@@ -395,30 +364,6 @@ export const projects: Project[] = [
     accent: ['#34D399', '#60A5FA'],
   },
   {
-    slug: 'routinehub',
-    title: 'RoutineHub',
-    client: 'Four science departments, Srikrishna College',
-    group: 'Education & administration',
-    category: 'Timetable builder',
-    year: '2026',
-    status: 'Delivered',
-    summary: 'Builds the class routine automatically for four science departments under the NEP odd-semester framework.',
-    highlights: [
-      'Seven periods a day, with the last kept for remedial and mentor-mentee classes',
-      'Every NEP slot type: MDC, Minor, Major, practicals, AECC, SEC, VAC and Tutorial',
-      'Pools of teachers per subject, assigned by daily availability',
-      'MDC and Minor slots enforced, with a clear message when one cannot be placed',
-    ],
-    metrics: [
-      { value: '24', label: 'Faculty' },
-      { value: '4', label: 'Departments' },
-    ],
-    stack: ['HTML & JavaScript', 'localStorage'],
-    links: [],
-    cover: 'mono',
-    accent: ['#F472B6', '#A78BFA'],
-  },
-  {
     slug: 'tc-committee-system',
     title: 'TC Committee Manager',
     client: 'Srikrishna College Teachers’ Council',
@@ -568,28 +513,6 @@ export const projects: Project[] = [
     links: [],
     cover: 'mono',
     accent: ['#5EEAD4', '#60A5FA'],
-  },
-  {
-    slug: 'himalaya360',
-    title: 'Himalaya360 Travel ERP',
-    client: 'A Sikkim and Darjeeling tour operator',
-    group: 'Business software',
-    category: 'Travel ERP',
-    year: '2026',
-    status: 'In development',
-    summary: 'One system for a tour operator running owned, leased and partner rooms, tour packages, car rental, drivers and guides.',
-    highlights: [
-      'Phase 1 delivered: sign-in, role-based access, main dashboard and database foundation',
-      'Planned: room inventory, bookings and CRM, transport, accounting with booking-wise profit, notifications and an AI assistant',
-    ],
-    metrics: [
-      { value: '8', label: 'Planned phases' },
-      { value: '50+', label: 'Properties it will scale to' },
-    ],
-    stack: ['Next.js', 'TypeScript', 'Node', 'PostgreSQL', 'Prisma', 'Google Cloud Run'],
-    links: [],
-    cover: 'mono',
-    accent: ['#38BDF8', '#5EEAD4'],
   },
   {
     slug: 'hsms-commercial',

@@ -1,0 +1,82 @@
+---
+// A screenshot shown in a browser window (wide shots) or a phone (tall shots).
+// Clicking it opens the full-size image in the lightbox.
+import { Image, getImage } from 'astro:assets';
+import type { Shot } from '../data/shots';
+
+interface Props {
+  shot: Shot;
+  address?: string;
+  eager?: boolean;
+  sizes?: string;
+  showCaption?: boolean;
+  /** false = a plain preview (used inside links), not clickable. */
+  interactive?: boolean;
+}
+const { shot, address = '', eager = false, sizes = '(max-width: 900px) 100vw, 1100px', showCaption = false, interactive = true } = Astro.props;
+const Tag = interactive ? 'button' : 'div';
+const tagProps = interactive
+  ? { type: 'button', 'data-lightbox-item': '', 'aria-label': `Open screenshot: ${shot.caption}` }
+  : {};
+const full = await getImage({ src: shot.img, width: Math.min(shot.img.width, 2000), format: 'webp' });
+const widths = shot.phone ? [320, 480, 780] : [640, 1024, 1400, 2000];
+---
+<figure class:list={['shot', shot.phone ? 'phone' : 'browser']}>
+  <Tag class:list={['open', { still: !interactive }]} data-full={full.src} data-caption={shot.caption} {...tagProps}>
+    {shot.phone ? (
+      <span class="device">
+        <span class="notch" aria-hidden="true"></span>
+        <Image src={shot.img} alt={shot.caption} widths={widths.filter((w) => w <= shot.img.width)} sizes={sizes} loading={eager ? 'eager' : 'lazy'} />
+      </span>
+    ) : (
+      <span class="window">
+        <span class="bar" aria-hidden="true"><i></i><i></i><i></i>{address && <span class="url">{address}</span>}</span>
+        <Image src={shot.img} alt={shot.caption} widths={widths.filter((w) => w <= shot.img.width)} sizes={sizes} loading={eager ? 'eager' : 'lazy'} />
+      </span>
+    )}
+    {interactive && (
+      <span class="zoom" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    )}
+  </Tag>
+  {showCaption && <figcaption>{shot.caption}</figcaption>}
+</figure>
+
+<style>
+  .shot { margin: 0; display: grid; gap: 12px; }
+  .open { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: left; }
+  .open.still { cursor: inherit; }
+  .open :global(img) { display: block; width: 100%; height: auto; }
+
+  .window {
+    display: block; overflow: hidden; border-radius: 14px;
+    background: var(--bg-2); border: 1px solid var(--line-2);
+    box-shadow: 0 40px 90px -40px rgb(0 0 0 / 0.75), 0 0 0 1px rgb(255 255 255 / 0.03);
+    transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+  }
+  .bar { display: flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px; background: color-mix(in srgb, var(--bg-2) 70%, var(--surface-2)); border-bottom: 1px solid var(--line); }
+  .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line-2); }
+  .bar i:nth-child(1) { background: #ff5f57; } .bar i:nth-child(2) { background: #febc2e; } .bar i:nth-child(3) { background: #28c840; }
+  .url { margin: 0 auto; padding: 3px 14px; border-radius: 7px; background: var(--surface); font-family: var(--font-mono); font-size: 11px; color: var(--text-3); max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .device {
+    position: relative; display: block; padding: 9px; border-radius: 40px;
+    background: linear-gradient(160deg, #2b303c, #0c0e13);
+    box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.8), inset 0 0 0 1px rgb(255 255 255 / 0.12);
+    transition: transform 0.6s var(--ease);
+  }
+  .device :global(img) { border-radius: 31px; }
+  .notch { position: absolute; z-index: 2; top: 17px; left: 50%; width: 30%; height: 20px; margin-left: -15%; border-radius: 12px; background: #000; }
+
+  .zoom {
+    position: absolute; right: 14px; bottom: 14px; width: 38px; height: 38px; display: grid; place-items: center;
+    border-radius: 50%; color: #fff; background: rgb(0 0 0 / 0.55); backdrop-filter: blur(6px);
+    opacity: 0; transform: scale(0.8); transition: opacity 0.3s, transform 0.3s var(--ease);
+  }
+  .zoom svg { width: 16px; height: 16px; }
+  .open:hover .zoom, .open:focus-visible .zoom { opacity: 1; transform: none; }
+  .open:hover .window { transform: translateY(-4px); box-shadow: 0 50px 100px -40px rgb(0 0 0 / 0.85), 0 0 0 1px rgb(var(--glow-cyan) / 0.25); }
+  .open:hover .device { transform: translateY(-4px) rotate(-1deg); }
+  figcaption { font-size: 14px; color: var(--text-2); padding-left: 2px; }
+</style>

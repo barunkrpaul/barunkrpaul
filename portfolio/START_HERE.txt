@@ -63,6 +63,13 @@ working copy of this folder outside Drive (for example in Documents) and
 copy it back to Drive as a backup.
 
 
+ADDING SCREENSHOTS
+Put screenshots in  src/assets/work/<project>/  (the folder names are the
+project slugs in src/data/projects.ts, e.g. hsms-hardware, leave-management).
+Name them 01-..., 02-... in the order you want. Then  npm run deploy.
+Hide personal data (names, phone numbers) before taking a screenshot.
+
+
 C. YOUR OWN DOMAIN (optional, later)
 ---------------------------------------------------------------------
 Firebase console > Hosting > Add custom domain, and follow the steps.

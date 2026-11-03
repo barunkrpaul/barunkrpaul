@@ -95,19 +95,19 @@ Extra pages:
 
 ## 5. Project inventory
 
-The site lists **26 projects**, sourced from the shared "Software Portfolio:
+The site lists **23 projects** (IPO One, RoutineHub and Himalaya360 were removed on request), sourced from the shared "Software Portfolio:
 Ujjal Kumar Das & Barun Kr Paul" document (3 Nov 2026), the repositories and
 earlier build sessions. The full data, one entry per project, lives in
 `portfolio/src/data/projects.ts`.
 
-- **10 featured with illustrated case studies:** Gymlive 2026 (flagship),
-  IPO One, AVK Platform, Question Paper Portal, HSMS (hardware store),
+- **9 featured with illustrated case studies:** Gymlive 2026 (flagship),
+  AVK Platform, Question Paper Portal, HSMS (hardware store),
   Mutual Transfer Portal, D'Avana Hotel PMS, Leave Management System,
   Examination Duty Register, PackMate.
 - **16 more in the "Everything we've built" index**, each with its own page:
-  SKC College Suite, CAS Navigator, RoutineHub, TC Committee Manager,
+  SKC College Suite, CAS Navigator, TC Committee Manager,
   Attendly, CampusCore ERP, CampusOne ERP, EduSphere School ERP, WB Government
-  School ERP, DentDesk, Himalaya360 Travel ERP, HSMS Commercial, Interior
+  School ERP, DentDesk, HSMS Commercial, Interior
   Studio CRM, Aya Centre Manager, Contractor360 ERP, Animated Lecture Series.
 
 **Left out on purpose:** PhD and research work (GeoClusterLab, the k-means
@@ -115,6 +115,8 @@ and image-encryption repos, Heusler ML, Lung CT U-Net, Geometry Research
 Ledger), TradeLab India (only a brief exists), UGCollegeSpace (not live),
 Family Records Vault (personal), the Fox & Mandal platform (confidential),
 and the profile README repo. Each is one entry away from being added.
+
+**Real screenshots** are on the Gymlive, AVK (demo data, placeholder names), PackMate and Question Paper Portal pages. Every other project has an empty folder in `portfolio/src/assets/work/<slug>/`: drop screenshots there and redeploy.
 
 **Still to confirm before launch** (from the document's own gaps list):
 - [ ] Who did what on each project. The site credits both of you unless the

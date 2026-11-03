@@ -43,6 +43,22 @@ and the `/work/<slug>` case-study page are created from it automatically.
 Covers are drawn in code; see the `cover` type in `src/data/projects.ts`
 for the available illustrations.
 
+### Adding screenshots to a project
+
+Put image files (png, jpg or webp) in `src/assets/work/<project-slug>/`, for
+example `src/assets/work/hsms-hardware/01-billing-counter.png`. They appear on
+that project's page automatically, in file-name order:
+
+- The first wide image is shown large in a browser window; the first tall
+  (phone) image overlaps it in a phone frame.
+- The rest go into the "Inside the product" gallery, and open full screen when
+  clicked.
+- The caption comes from the file name: `01-billing-counter.png` becomes
+  "Billing counter".
+
+Images are resized and compressed for you when the site is built. Remove any
+personal data (names, phone numbers) before adding a screenshot.
+
 ## Pages
 
 - `/`: hero, numbers, selected work, the duo, services, process, toolkit,
