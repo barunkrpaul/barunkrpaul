@@ -12,9 +12,11 @@ import { people } from '../data/site';
     <div class="pair">
       {people.map((p, i) => (
         <article class:list={['person', 'glass', 'reveal', p.hue]} style={`--d:${i * 0.12}s`} data-tilt data-hover>
-          <div class="portrait" data-ascii={p.initials.slice(0, 1)} aria-hidden="true">
-            <pre data-ascii-out></pre>
-            <span class="ring"></span>
+          <div class="portrait" data-ascii-photo>
+            <img class="fill" src={p.photo} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+            <img class="photo" src={p.photo} alt={`Portrait of ${p.name}`} loading="lazy" decoding="async" />
+            <pre data-ascii-out aria-hidden="true"></pre>
+            <span class="scan" aria-hidden="true"></span>
           </div>
           <div class="body">
             <span class="mono">0{i + 1} · {p.role}</span>
@@ -48,17 +50,43 @@ import { people } from '../data/site';
   .person.cyan { --hue: var(--cyan); --hue-rgb: var(--glow-cyan); }
   .person.violet { --hue: #a78bfa; --hue-rgb: var(--glow-violet); }
   .portrait {
-    position: relative; height: 260px; border-radius: 16px; overflow: hidden;
-    display: grid; place-items: center;
+    position: relative; aspect-ratio: 1 / 1; border-radius: 16px; overflow: hidden;
     background: radial-gradient(80% 80% at 50% 40%, rgb(var(--hue-rgb) / 0.18), transparent 70%), var(--bg-2);
     border: 1px solid var(--line);
   }
-  pre {
-    margin: 0; font-family: var(--font-mono); font-size: 9px; line-height: 9px; letter-spacing: 1px;
-    color: var(--hue); text-shadow: 0 0 12px rgb(var(--hue-rgb) / 0.6);
-    user-select: none;
+  .portrait img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    transition: opacity 0.9s var(--ease), filter 1.1s var(--ease), transform 1.2s var(--ease);
   }
-  .ring { position: absolute; width: 210px; height: 210px; border-radius: 50%; border: 1px dashed rgb(var(--hue-rgb) / 0.35); animation: spin 30s linear infinite; }
+  /* The whole photo, never cropped… */
+  .portrait .photo { object-fit: contain; }
+  /* …over a blurred copy of itself that fills any space around it. */
+  .portrait .fill { object-fit: cover; filter: blur(28px) brightness(0.55) saturate(1.2); transform: scale(1.15); }
+  .person:hover .portrait .photo { transform: scale(1.02); }
+  .portrait::after {
+    /* soft colour wash at the bottom edge, in each person's hue */
+    content: ''; position: absolute; inset: auto 0 0 0; height: 40%; pointer-events: none;
+    background: linear-gradient(to top, rgb(var(--hue-rgb) / 0.28), transparent);
+    mix-blend-mode: screen;
+  }
+  pre {
+    position: absolute; inset: 0; margin: 0; display: grid; place-items: center;
+    font-family: var(--font-mono); line-height: 1; letter-spacing: 0; white-space: pre;
+    color: var(--hue); text-shadow: 0 0 10px rgb(var(--hue-rgb) / 0.55);
+    background: color-mix(in srgb, var(--bg-2) 62%, transparent); user-select: none; pointer-events: none;
+    opacity: 0; transition: opacity 0.9s var(--ease);
+  }
+  /* While the ASCII version plays, the photo waits underneath. */
+  /* During the ASCII stage the photo shows faintly through the characters. */
+  .portrait.ascii .fill { opacity: 0; }
+  .portrait.ascii .photo { opacity: 0.38; filter: grayscale(1) contrast(1.2) blur(1px); }
+  .portrait.ascii pre { opacity: 1; }
+  .scan {
+    position: absolute; left: 0; right: 0; top: 0; height: 2px; pointer-events: none; opacity: 0;
+    background: linear-gradient(90deg, transparent, var(--hue), transparent); box-shadow: 0 0 18px var(--hue);
+  }
+  .portrait.revealing .scan { animation: scan 0.9s var(--ease) forwards; }
+  @keyframes scan { 0% { opacity: 1; top: 0; } 100% { opacity: 0; top: 100%; } }
   @keyframes spin { to { transform: rotate(360deg); } }
   .body { display: grid; gap: 14px; }
   .mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--hue); }
@@ -80,5 +108,5 @@ import { people } from '../data/site';
     .pair { grid-template-columns: 1fr; }
     .bond { display: none; }
   }
-  @media (prefers-reduced-motion: reduce) { .ring, .bond::before { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .bond::before { animation: none; } }
 </style>

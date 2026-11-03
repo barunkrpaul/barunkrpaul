@@ -216,52 +216,85 @@ function initProgressRail() {
   cleanups.push(() => window.removeEventListener('scroll', onScroll));
 }
 
-// Portraits drawn as ASCII art from a big letter, which "decodes" into place.
-// (Swap for real ASCII portraits once photos arrive: generate.py makes them.)
+// Portraits: the photo is first drawn as ASCII art (sampled from the photo
+// itself), which decodes into place and then dissolves into the real photo.
+// Hovering the card plays it again.
 const RAMP = ' .:-=+*#%@';
 function initAscii() {
-  document.querySelectorAll<HTMLElement>('[data-ascii]').forEach((box) => {
+  document.querySelectorAll<HTMLElement>('[data-ascii-photo]').forEach((box) => {
     const out = box.querySelector('pre');
-    if (!out) return;
-    const letter = box.dataset.ascii ?? '?';
-    const cols = 46, rows = 26;
-    const c = document.createElement('canvas');
-    c.width = cols; c.height = rows;
-    const g = c.getContext('2d')!;
-    g.fillStyle = '#000'; g.fillRect(0, 0, cols, rows);
-    const grad = g.createRadialGradient(cols / 2, rows / 2, 2, cols / 2, rows / 2, cols / 1.6);
-    grad.addColorStop(0, 'rgba(255,255,255,0.25)'); grad.addColorStop(1, 'rgba(255,255,255,0)');
-    g.fillStyle = grad; g.fillRect(0, 0, cols, rows);
-    g.fillStyle = '#fff';
-    g.font = `700 ${rows * 1.05}px "Space Grotesk", sans-serif`;
-    g.textAlign = 'center'; g.textBaseline = 'middle';
-    g.save(); g.scale(1.9, 1); g.fillText(letter, cols / 2 / 1.9, rows / 2 + 1); g.restore();
-    const data = g.getImageData(0, 0, cols, rows).data;
-    const target: string[] = [];
-    for (let y = 0; y < rows; y++) {
-      let line = '';
-      for (let x = 0; x < cols; x++) {
-        const v = data[(y * cols + x) * 4] / 255;
-        line += RAMP[Math.min(RAMP.length - 1, Math.floor(v * RAMP.length))];
+    const img = box.querySelector<HTMLImageElement>('img.photo');
+    if (!out || !img || reduced()) return;
+    const cols = 92;
+    const rows = Math.round(cols * 0.6); // character cells are ~0.6 as wide as tall; the box is square
+    let final = '';
+    let busy = false;
+
+    const sample = () => {
+      const c = document.createElement('canvas');
+      c.width = cols; c.height = rows;
+      const g = c.getContext('2d', { willReadFrequently: true })!;
+      // The whole photo, fitted inside the square like object-fit: contain.
+      g.fillStyle = '#000'; g.fillRect(0, 0, cols, rows);
+      const ar = img.naturalWidth / img.naturalHeight;
+      let dw = cols, dh = rows;
+      if (ar > 1) dh = rows / ar; else dw = cols * ar;
+      g.drawImage(img, (cols - dw) / 2, (rows - dh) / 2, dw, dh);
+      const d = g.getImageData(0, 0, cols, rows).data;
+      const lum: number[] = [];
+      for (let i = 0; i < d.length; i += 4) lum.push(0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]);
+      const lo = Math.min(...lum), hi = Math.max(...lum) || 1;
+      const lines: string[] = [];
+      for (let y = 0; y < rows; y++) {
+        let line = '';
+        for (let x = 0; x < cols; x++) {
+          const v = (lum[y * cols + x] - lo) / (hi - lo);
+          line += RAMP[Math.min(RAMP.length - 1, Math.floor(v * RAMP.length))];
+        }
+        lines.push(line);
       }
-      target.push(line);
-    }
-    const final = target.join('\n');
-    if (reduced()) { out.textContent = final; return; }
-    const run = () => {
+      final = lines.join('\n');
+    };
+    const fit = () => { out.style.fontSize = `${box.clientWidth / (cols * 0.6)}px`; };
+
+    const play = () => {
+      if (busy || !final) return;
+      busy = true;
+      fit();
+      box.classList.add('ascii');
+      box.classList.remove('revealing');
       let f = 0;
+      const frames = 34;
       const tick = () => {
-        const p = f / 40;
-        out.textContent = [...final].map((ch, i) => (ch === '\n' || ch === ' ' ? ch : Math.random() < p + (i % cols) / cols * 0.2 ? ch : RAMP[(Math.random() * RAMP.length) | 0])).join('');
-        if (f++ < 40) requestAnimationFrame(tick); else out.textContent = final;
+        const p = f / frames;
+        out.textContent = [...final].map((ch, i) => (ch === '\n' || ch === ' ' ? ch : Math.random() < p * 1.15 - ((i % (cols + 1)) / cols) * 0.15 ? ch : RAMP[(Math.random() * RAMP.length) | 0])).join('');
+        if (f++ < frames) { requestAnimationFrame(tick); return; }
+        out.textContent = final;
+        setTimeout(() => {
+          box.classList.add('revealing');
+          box.classList.remove('ascii');
+          setTimeout(() => { busy = false; }, 900);
+        }, 450);
       };
       tick();
     };
-    out.textContent = final.replace(/[^\n]/g, ' ');
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { run(); io.disconnect(); } }, { threshold: 0.4 });
+
+    const ready = () => { try { sample(); } catch { final = ''; } };
+    if (img.complete && img.naturalWidth) ready(); else img.addEventListener('load', ready, { once: true });
+
+    // Start in ASCII so the first reveal is seen; without JS the photo simply shows.
+    box.classList.add('ascii');
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const go = () => (final ? play() : box.classList.remove('ascii'));
+      img.complete ? go() : img.addEventListener('load', go, { once: true });
+    }, { threshold: 0.45 });
     io.observe(box);
-    box.closest('article')?.addEventListener('pointerenter', run);
-    cleanups.push(() => io.disconnect());
+    const replay = () => fine() && play();
+    box.closest('article')?.addEventListener('pointerenter', replay);
+    window.addEventListener('resize', fit);
+    cleanups.push(() => { io.disconnect(); window.removeEventListener('resize', fit); });
   });
 }
 
