@@ -2,7 +2,7 @@
 import { brands, showBrandSwitcher } from '../data/site';
 ---
 {showBrandSwitcher && (
-  <div class="brand-switch glass" data-brand-switch transition:persist="brand-switch">
+  <div class="brand-switch glass" data-brand-switch hidden transition:persist="brand-switch">
     <button class="toggle" data-brand-toggle aria-expanded="false">
       <span class="dot"></span> Name preview
     </button>
@@ -15,6 +15,7 @@ import { brands, showBrandSwitcher } from '../data/site';
 )}
 
 <style>
+  .brand-switch[hidden] { display: none; }
   .brand-switch {
     position: fixed; left: 16px; bottom: 16px; z-index: 60;
     display: flex; align-items: center; gap: 6px; padding: 6px;

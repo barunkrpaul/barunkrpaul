@@ -1,0 +1,92 @@
+OUR PORTFOLIO - FIREBASE HOSTING
+Ujjal Kumar Das & Barun Kr Paul
+=====================================================================
+
+WHAT IS IN THIS FOLDER
+---------------------------------------------------------------------
+dist/            The finished website, ready to upload. Nothing to build.
+src/             The source. Edit text here (see "CHANGING THE SITE").
+firebase.json    Hosting settings (clean addresses, caching, security).
+.firebaserc      Links this folder to your Firebase project. EDIT ONCE.
+package.json     Commands: npm run build, npm run deploy.
+README.md        Developer notes.
+
+(.firebaserc starts with a dot, so the Mac hides it. In Finder press
+ Cmd + Shift + . to show hidden files.)
+
+
+A. FIRST TIME: PUT THE SITE ONLINE (about 10 minutes)
+---------------------------------------------------------------------
+1. Create the Firebase project
+   - Open https://console.firebase.google.com and sign in with the
+     Google account that should own the site.
+   - Add project. Name it, for example:  our-portfolio
+     Firebase shows the Project ID under the name (for example
+     our-portfolio-1a2b3). Copy that Project ID.
+   - Google Analytics is not needed. The free Spark plan is enough.
+
+2. Put the Project ID in .firebaserc
+   Open .firebaserc in TextEdit and replace
+       REPLACE-WITH-YOUR-PROJECT-ID
+   with your Project ID. Save.
+
+3. Install the Firebase tools (skip if you already did this for
+   Gymlive):
+   - Node.js (LTS) from https://nodejs.org
+   - Terminal:   npm install -g firebase-tools
+   - Terminal:   firebase login
+     (use the same Google account as in step 1)
+
+4. Upload
+   In Terminal, go into this folder. The easiest way: type  cd  and a
+   space, drag this folder from Finder into the Terminal window, press
+   Return. Then:
+       firebase deploy --only hosting
+
+5. Open the address Firebase prints, e.g.
+       https://our-portfolio-1a2b3.web.app
+   That is your live portfolio.
+
+
+B. CHANGING THE SITE LATER
+---------------------------------------------------------------------
+Almost every word on the site is in two files:
+   src/data/projects.ts   every project: text, numbers, links, status
+   src/data/site.ts       names, tagline, bios, services, contact email
+
+After editing:
+   First time only, in this folder:   npm install
+   Every time:                        npm run deploy
+(npm run deploy builds the site into dist/ and uploads it.)
+
+Tip: npm install creates a large node_modules folder. Inside Google
+Drive that means thousands of files to sync. If Drive gets slow, keep a
+working copy of this folder outside Drive (for example in Documents) and
+copy it back to Drive as a backup.
+
+
+C. YOUR OWN DOMAIN (optional, later)
+---------------------------------------------------------------------
+Firebase console > Hosting > Add custom domain, and follow the steps.
+Firebase gives the DNS records to add at your domain registrar. HTTPS
+is set up for you.
+
+
+D. THE NAME PREVIEW SWITCHER
+---------------------------------------------------------------------
+Visitors only see the first name in the list (k = 2). To compare all
+names on the live site in YOUR browser, open:
+       https://<your-site>.web.app/?names
+and to hide the switcher again:
+       https://<your-site>.web.app/?names=off
+When you have chosen a name: in src/data/site.ts move it to the top of
+"brands", set showBrandSwitcher = false, then npm run deploy.
+
+
+E. BEFORE SHARING WIDELY - CHECK
+---------------------------------------------------------------------
+[ ] Bios and "who did what" on each project are right
+[ ] Clients are happy to be named (D'Avana is named; the hardware store
+    is not)
+[ ] Question Paper Portal: add its link back in projects.ts once the
+    papers are restored on the new database

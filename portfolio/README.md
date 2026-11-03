@@ -53,8 +53,19 @@ for the available illustrations.
   we've built" index with category filters.
 - `/404`: page not found
 
-## Hosting
+## Hosting (Firebase)
 
-Not decided yet. The site is plain static files in `dist/`, so it works on
-Vercel, Netlify, Cloudflare Pages, Firebase Hosting or GitHub Pages. After
-you pick a domain, set `site` in `astro.config.mjs`.
+The site is hosted on Firebase Hosting. Step-by-step instructions are in
+`START_HERE.txt`. In short:
+
+```
+# once: put your Project ID in .firebaserc, then
+npm install -g firebase-tools
+firebase login
+# every time you change something
+npm run deploy      # = astro build && firebase deploy --only hosting
+```
+
+`firebase.json` serves the built `dist/` folder with clean addresses,
+long-term caching for hashed assets and basic security headers.
+After you pick a domain, also set `site` in `astro.config.mjs`.

@@ -33,9 +33,20 @@ export function setBrand(id: string) {
   if (t) t.textContent = `${t.dataset.titleSuffix ?? ''}${name}${t.dataset.titleSuffix ? '' : ' · Two minds. One build.'}`;
   store.set('brand', id);
 }
+// The "Name preview" switcher is for the two of you, not for visitors.
+// Open the site once with ?names in the address to switch it on in your
+// browser, and with ?names=off to switch it off again.
+function namePreviewOn() {
+  const q = new URLSearchParams(location.search).get('names');
+  if (q !== null) store.set('names-preview', q === 'off' ? '0' : '1');
+  return store.get('names-preview') === '1';
+}
 function applyBrand() {
+  const on = namePreviewOn();
+  const box = document.querySelector<HTMLElement>('[data-brand-switch]');
+  if (box) box.hidden = !on;
   const id = store.get('brand');
-  if (id) setBrand(id);
+  if (on && id) setBrand(id);
 }
 
 /* ---------------- Once per visit (persistent UI) ---------------- */
