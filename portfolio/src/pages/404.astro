@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page not found">
+  <section class="lost wrap">
+    <p class="code" aria-hidden="true"><span>4</span><span class="grad-text">0</span><span>4</span></p>
+    <h1>This point drifted out of its orbit.</h1>
+    <p>The page you were looking for does not exist, or has moved.</p>
+    <div class="ctas">
+      <a href="/" class="btn btn-primary" data-magnetic>Back home</a>
+      <button class="btn btn-ghost" data-open-palette>Open the command menu</button>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lost { min-height: 100svh; display: grid; align-content: center; gap: 20px; padding-top: 100px; padding-bottom: 60px; }
+  .code { display: flex; font-family: var(--font-display); font-weight: 700; font-size: clamp(120px, 28vw, 320px); letter-spacing: -0.07em; line-height: 0.85; }
+  .code span { display: inline-block; animation: wobble 6s ease-in-out infinite; }
+  .code span:nth-child(2) { animation-delay: -2s; }
+  .code span:nth-child(3) { animation-delay: -4s; }
+  @keyframes wobble { 50% { transform: translateY(-14px) rotate(-3deg); } }
+  h1 { font-size: clamp(30px, 4.5vw, 56px); }
+  p { color: var(--text-2); font-size: 18px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+  @media (prefers-reduced-motion: reduce) { .code span { animation: none; } }
+</style>

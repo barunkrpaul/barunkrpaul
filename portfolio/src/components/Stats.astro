@@ -1,0 +1,41 @@
+---
+import { stats } from '../data/site';
+const words = ['Android apps', 'Live scoring systems', 'Web platforms', 'NGO technology', 'Progressive web apps', 'Dashboards', 'Secure by design', 'Offline-first'];
+---
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    {[0, 1].map(() => (
+      <div class="seq">{words.map((w) => <span>{w}<i>✦</i></span>)}</div>
+    ))}
+  </div>
+</div>
+
+<section class="stats" aria-label="In numbers">
+  <div class="wrap grid">
+    {stats.map((s, i) => (
+      <div class="stat reveal" style={`--d:${i * 0.08}s`}>
+        <b data-count={s.value}>{s.value}</b><span class="suffix">{s.suffix}</span>
+        <p>{s.label}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .marquee { overflow: hidden; border-block: 1px solid var(--line); padding: 22px 0; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+  .track { display: flex; width: max-content; animation: scroll 40s linear infinite; }
+  .seq { display: flex; }
+  .seq span { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; font-family: var(--font-display); font-size: clamp(22px, 3vw, 34px); font-weight: 500; letter-spacing: -0.02em; color: var(--text-2); white-space: nowrap; }
+  .seq i { font-style: normal; font-size: 0.6em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+  .marquee:hover .track { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) { .track { animation: none; } }
+
+  .stats { padding: 90px 0 20px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .stat { padding: 26px 0 0; border-top: 1px solid var(--line-2); }
+  .stat b { font-family: var(--font-display); font-weight: 600; font-size: clamp(56px, 7vw, 96px); line-height: 1; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+  .suffix { font-family: var(--font-display); font-size: 40px; color: var(--text-3); }
+  .stat p { color: var(--text-2); margin-top: 10px; max-width: 220px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; } }
+</style>

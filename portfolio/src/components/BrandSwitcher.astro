@@ -1,0 +1,37 @@
+---
+import { brands, showBrandSwitcher } from '../data/site';
+---
+{showBrandSwitcher && (
+  <div class="brand-switch glass" data-brand-switch transition:persist="brand-switch">
+    <button class="toggle" data-brand-toggle aria-expanded="false">
+      <span class="dot"></span> Name preview
+    </button>
+    <div class="options" role="radiogroup" aria-label="Preview the site with a different name">
+      {brands.map((b, i) => (
+        <button role="radio" aria-checked={i === 0 ? 'true' : 'false'} data-brand-option={b.id} data-name={b.name} data-short={b.short}>{b.name}</button>
+      ))}
+    </div>
+  </div>
+)}
+
+<style>
+  .brand-switch {
+    position: fixed; left: 16px; bottom: 16px; z-index: 60;
+    display: flex; align-items: center; gap: 6px; padding: 6px;
+    border-radius: 999px; font-size: 13px;
+    background: color-mix(in srgb, var(--bg) 75%, transparent);
+    box-shadow: var(--shadow);
+    max-width: calc(100vw - 32px);
+  }
+  .toggle { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); white-space: nowrap; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--grad); }
+  .options { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .options button { padding: 8px 12px; border-radius: 999px; color: var(--text-2); white-space: nowrap; transition: background 0.2s, color 0.2s; }
+  .options button:hover { color: var(--text); background: var(--surface-2); }
+  .options button[aria-checked='true'] { background: var(--text); color: var(--bg); }
+  @media (max-width: 760px) {
+    .options { display: none; }
+    .brand-switch.open { flex-direction: column; align-items: stretch; border-radius: 20px; }
+    .brand-switch.open .options { display: flex; flex-direction: column; }
+  }
+</style>

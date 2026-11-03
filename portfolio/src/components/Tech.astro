@@ -1,0 +1,81 @@
+---
+import { tech } from '../data/site';
+const groups = Object.entries(tech);
+// Fewest items on the smallest ring, so the tags never crowd.
+const ringOrder = [...groups].sort((a, b) => a[1].length - b[1].length);
+// Rings from the inside out; each item is placed evenly around its ring.
+const rings = ringOrder.map(([name, items], gi) => ({
+  name,
+  r: `${17 + gi * 9.5}cqw`,
+  dur: 60 + gi * 22,
+  dir: gi % 2 ? -1 : 1,
+  items: items.map((label, i) => ({ label, angle: (360 / items.length) * i + gi * 17 })),
+}));
+const hues = ['var(--cyan)', 'var(--sky)', '#a78bfa', 'var(--magenta)'];
+---
+<section class="section tech" id="tech">
+  <div class="wrap layout">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-scramble>Our toolkit</span>
+      <h2>The tools we <span class="grad-text">ship with.</span></h2>
+      <p>Proven, well-supported technology, chosen for each project rather than out of habit.</p>
+      <dl class="legend">
+        {groups.map(([name, items], i) => (
+          <div><dt style={`--c:${hues[i]}`}>{name}</dt><dd>{items.join(' · ')}</dd></div>
+        ))}
+      </dl>
+    </div>
+    <div class="orbit reveal" aria-hidden="true">
+      <div class="core"><span>Two minds.<br />One build.</span></div>
+      {rings.map((ring, gi) => (
+        <div class="ring" style={`--r:${ring.r};--dur:${ring.dur}s;--dir:${ring.dir};--c:${hues[groups.findIndex(([n]) => n === ring.name)]}`}>
+          {ring.items.map((it) => (
+            <span class="arm" style={`--a:${it.angle}deg`}><span class="tag">{it.label}</span></span>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .layout { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; align-items: center; }
+  .legend { margin: 10px 0 0; display: grid; gap: 14px; }
+  .legend div { display: grid; grid-template-columns: 90px 1fr; gap: 12px; }
+  dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); padding-top: 2px; }
+  dd { margin: 0; color: var(--text-2); font-size: 15px; }
+
+  .orbit { container-type: inline-size; position: relative; aspect-ratio: 1; width: 100%; max-width: 640px; margin: 0 auto; display: grid; place-items: center; }
+  .core { position: absolute; width: 150px; height: 150px; border-radius: 50%; display: grid; place-items: center; text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 17px; line-height: 1.15; background: radial-gradient(circle, rgb(var(--glow-violet) / 0.35), transparent 70%); }
+  .core::before { content: ''; position: absolute; inset: 28px; border-radius: 50%; border: 1px solid var(--line-2); background: var(--bg); z-index: -1; box-shadow: 0 0 60px rgb(var(--glow-cyan) / 0.25); }
+  .ring {
+    position: absolute; left: 50%; top: 50%; width: calc(var(--r) * 2); height: calc(var(--r) * 2);
+    margin: calc(var(--r) * -1) 0 0 calc(var(--r) * -1);
+    border-radius: 50%; border: 1px dashed color-mix(in srgb, var(--c) 30%, transparent);
+    animation: rot var(--dur) linear infinite; animation-direction: normal;
+  }
+  .ring[style*='--dir:-1'] { animation-direction: reverse; }
+  .orbit:hover .ring { animation-play-state: paused; }
+  .orbit:hover .tag { animation-play-state: paused; }
+  .arm { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--a)) translateX(var(--r)); }
+  .tag {
+    position: absolute; left: 0; top: 0; translate: -50% -50%;
+    white-space: nowrap; font-size: 12.5px; padding: 6px 11px; border-radius: 99px;
+    background: color-mix(in srgb, var(--bg) 85%, transparent); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+    color: var(--text); box-shadow: 0 0 18px color-mix(in srgb, var(--c) 20%, transparent);
+    rotate: calc(var(--a) * -1);
+    animation: counter var(--dur) linear infinite;
+  }
+  .ring[style*='--dir:-1'] .tag { animation-direction: reverse; }
+  @keyframes rot { to { transform: rotate(360deg); } }
+  @keyframes counter { to { transform: rotate(-360deg); } }
+
+  @media (max-width: 1080px) {
+    .layout { grid-template-columns: 1fr; }
+    .orbit { max-width: 560px; }
+  }
+  @media (max-width: 640px) {
+    .orbit { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .ring, .tag { animation: none; } }
+</style>

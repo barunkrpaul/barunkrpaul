@@ -1,0 +1,84 @@
+---
+import { people } from '../data/site';
+---
+<section class="section duo" id="duo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-scramble>The duo</span>
+      <h2>Two builders. <span class="grad-text">One team.</span></h2>
+      <p>No hand-offs between departments: the people you talk to are the people who write the code. Between us we cover mobile, web, cloud and design.</p>
+    </div>
+
+    <div class="pair">
+      {people.map((p, i) => (
+        <article class:list={['person', 'glass', 'reveal', p.hue]} style={`--d:${i * 0.12}s`} data-tilt data-hover>
+          <div class="portrait" data-ascii={p.initials.slice(0, 1)} aria-hidden="true">
+            <pre data-ascii-out></pre>
+            <span class="ring"></span>
+          </div>
+          <div class="body">
+            <span class="mono">0{i + 1} · {p.role}</span>
+            <h3>{p.name}</h3>
+            <p>{p.bio}</p>
+            <ul class="skills">{p.strengths.map((s) => <li>{s}</li>)}</ul>
+            <div class="links">
+              {p.links.map((l) => (
+                <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noopener" data-magnetic>
+                  {l.label} <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+      <div class="bond" aria-hidden="true"><span>+</span></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pair { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .person {
+    --mx: 50%; --my: 50%; --rx: 0deg; --ry: 0deg;
+    position: relative; overflow: hidden; display: grid; gap: 26px; padding: 26px;
+    transform: perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 0.5s var(--ease), border-color 0.4s;
+  }
+  .person:hover { border-color: var(--line-2); }
+  .person.cyan { --hue: var(--cyan); --hue-rgb: var(--glow-cyan); }
+  .person.violet { --hue: #a78bfa; --hue-rgb: var(--glow-violet); }
+  .portrait {
+    position: relative; height: 260px; border-radius: 16px; overflow: hidden;
+    display: grid; place-items: center;
+    background: radial-gradient(80% 80% at 50% 40%, rgb(var(--hue-rgb) / 0.18), transparent 70%), var(--bg-2);
+    border: 1px solid var(--line);
+  }
+  pre {
+    margin: 0; font-family: var(--font-mono); font-size: 9px; line-height: 9px; letter-spacing: 1px;
+    color: var(--hue); text-shadow: 0 0 12px rgb(var(--hue-rgb) / 0.6);
+    user-select: none;
+  }
+  .ring { position: absolute; width: 210px; height: 210px; border-radius: 50%; border: 1px dashed rgb(var(--hue-rgb) / 0.35); animation: spin 30s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .body { display: grid; gap: 14px; }
+  .mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--hue); }
+  h3 { font-size: clamp(30px, 3.4vw, 44px); }
+  .body p { color: var(--text-2); }
+  .skills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .skills li { font-size: 13px; padding: 5px 11px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .links a { --mx: 0px; --my: 0px; transform: translate(var(--mx), var(--my)); padding: 8px 14px; border-radius: 99px; border: 1px solid var(--line-2); font-size: 14px; transition: background 0.25s, transform 0.35s var(--ease); }
+  .links a:hover { background: var(--surface-2); }
+  .bond {
+    position: absolute; left: 50%; top: 130px; width: 56px; height: 56px; margin: -28px 0 0 -28px; z-index: 2;
+    display: grid; place-items: center; border-radius: 50%;
+    background: var(--bg); border: 1px solid var(--line-2); box-shadow: 0 0 40px rgb(var(--glow-violet) / 0.35);
+    font-size: 26px; font-weight: 300;
+  }
+  .bond::before { content: ''; position: absolute; inset: -6px; border-radius: 50%; background: conic-gradient(from 0deg, var(--cyan), var(--violet), var(--magenta), var(--cyan)); z-index: -1; animation: spin 6s linear infinite; mask: radial-gradient(circle, transparent 30px, #000 31px); -webkit-mask: radial-gradient(circle, transparent 30px, #000 31px); }
+  @media (max-width: 860px) {
+    .pair { grid-template-columns: 1fr; }
+    .bond { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .ring, .bond::before { animation: none; } }
+</style>

@@ -1,0 +1,85 @@
+---
+import { projects } from '../data/projects';
+import { brands, people, contactEmail } from '../data/site';
+
+// Every command the palette knows. `run` is read by scripts/palette.ts.
+const commands = [
+  { group: 'Go to', label: 'Selected work', hint: 'section', run: 'go:/#work' },
+  { group: 'Go to', label: 'The Duo', hint: 'section', run: 'go:/#duo' },
+  { group: 'Go to', label: 'Services', hint: 'section', run: 'go:/#services' },
+  { group: 'Go to', label: 'How we work', hint: 'section', run: 'go:/#process' },
+  { group: 'Go to', label: 'Start a project', hint: 'section', run: 'go:/#contact' },
+  ...projects.map((p) => ({ group: 'Projects', label: p.title, hint: p.category, run: `go:/work/${p.slug}` })),
+  { group: 'Actions', label: 'Switch light / dark theme', hint: 'theme', run: 'theme' },
+  { group: 'Actions', label: `Copy email (${contactEmail})`, hint: 'copy', run: `copy:${contactEmail}` },
+  ...brands.map((b) => ({ group: 'Name preview', label: `Show the site as “${b.name}”`, hint: 'brand', run: `brand:${b.id}` })),
+  { group: 'Terminal', label: 'whoami ujjal', hint: 'try it', run: 'term:whoami ujjal' },
+  { group: 'Terminal', label: 'whoami barun', hint: 'try it', run: 'term:whoami barun' },
+  { group: 'Terminal', label: 'neofetch', hint: 'try it', run: 'term:neofetch' },
+];
+const terminalData = {
+  people: people.map((p) => ({ id: p.id, name: p.name, role: p.role, strengths: p.strengths })),
+  projects: projects.map((p) => p.title),
+};
+---
+<div class="palette" data-palette hidden transition:persist="palette">
+  <div class="backdrop" data-close-palette></div>
+  <div class="panel glass" role="dialog" aria-modal="true" aria-label="Command menu">
+    <div class="search">
+      <span class="prompt" aria-hidden="true">›</span>
+      <input data-palette-input type="text" placeholder="Type a command or search…  try “whoami barun”" autocomplete="off" spellcheck="false" aria-label="Command" />
+      <kbd>esc</kbd>
+    </div>
+    <pre class="term" data-term hidden></pre>
+    <ul class="list" data-palette-list role="listbox">
+      {commands.map((c, i) => (
+        <li role="option" data-cmd={c.run} data-group={c.group} data-label={c.label.toLowerCase()} aria-selected={i === 0 ? 'true' : 'false'}>
+          <span class="group">{c.group}</span>
+          <span class="label">{c.label}</span>
+          <span class="hint">{c.hint}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="foot"><span><kbd>↑</kbd> <kbd>↓</kbd> move</span><span><kbd>↵</kbd> run</span><span><kbd>⌘K</kbd> or <kbd>/</kbd> open</span></div>
+  </div>
+  <script type="application/json" data-term-data set:html={JSON.stringify(terminalData)} />
+</div>
+
+<style>
+  .palette { position: fixed; inset: 0; z-index: 80; display: grid; place-items: start center; padding: 12vh 16px 16px; }
+  .palette[hidden] { display: none; }
+  .backdrop { position: absolute; inset: 0; background: rgb(0 0 0 / 0.55); backdrop-filter: blur(6px); animation: fade 0.25s var(--ease); }
+  .panel {
+    position: relative; width: min(640px, 100%); overflow: hidden;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    box-shadow: var(--shadow), 0 0 0 1px var(--line-2);
+    animation: pop 0.35s var(--ease);
+  }
+  @keyframes fade { from { opacity: 0; } }
+  @keyframes pop { from { opacity: 0; transform: translateY(-10px) scale(0.98); } }
+  .search { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--line); }
+  .prompt { font-family: var(--font-mono); color: var(--cyan); font-size: 20px; }
+  input { flex: 1; min-width: 0; background: none; border: 0; outline: none; color: var(--text); font-family: var(--font-mono); font-size: 15px; }
+  .term {
+    margin: 0; padding: 16px 18px; border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 13px; line-height: 1.6; color: var(--text-2);
+    white-space: pre-wrap; max-height: 260px; overflow: auto;
+  }
+  .term :global(b) { color: var(--cyan); font-weight: 500; }
+  .term :global(i) { color: var(--magenta); font-style: normal; }
+  .list { list-style: none; margin: 0; padding: 8px; max-height: min(52vh, 420px); overflow: auto; }
+  .list li {
+    display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 12px;
+    padding: 11px 12px; border-radius: 12px; cursor: pointer; font-size: 14px;
+  }
+  .list li[hidden] { display: none; }
+  .list li[aria-selected='true'] { background: var(--surface-2); box-shadow: inset 2px 0 0 var(--cyan); }
+  .group { font-family: var(--font-mono); font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; }
+  .hint { font-family: var(--font-mono); font-size: 11px; color: var(--text-3); }
+  .foot { display: flex; gap: 18px; padding: 10px 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--text-3); }
+  @media (max-width: 560px) {
+    .list li { grid-template-columns: 1fr auto; }
+    .group { display: none; }
+    .foot { display: none; }
+  }
+</style>
