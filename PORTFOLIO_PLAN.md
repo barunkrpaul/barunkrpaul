@@ -95,12 +95,12 @@ Extra pages:
 
 ## 5. Project inventory
 
-The site lists **23 projects** (IPO One, RoutineHub and Himalaya360 were removed on request), sourced from the shared "Software Portfolio:
+The site lists **24 projects** (IPO One, RoutineHub and Himalaya360 were removed on request; Swastika Academy added first), sourced from the shared "Software Portfolio:
 Ujjal Kumar Das & Barun Kr Paul" document (3 Nov 2026), the repositories and
 earlier build sessions. The full data, one entry per project, lives in
 `portfolio/src/data/projects.ts`.
 
-- **9 featured with illustrated case studies:** Gymlive 2026 (flagship),
+- **10 featured case studies:** Swastika Academy (school website & ERP, shown first), Gymlive 2026 (flagship),
   AVK Platform, Question Paper Portal, HSMS (hardware store),
   Mutual Transfer Portal, D'Avana Hotel PMS, Leave Management System,
   Examination Duty Register, PackMate.
@@ -116,7 +116,7 @@ Ledger), TradeLab India (only a brief exists), UGCollegeSpace (not live),
 Family Records Vault (personal), the Fox & Mandal platform (confidential),
 and the profile README repo. Each is one entry away from being added.
 
-**Real screenshots** are on the Gymlive, AVK (demo data, placeholder names), PackMate and Question Paper Portal pages. Every other project has an empty folder in `portfolio/src/assets/work/<slug>/`: drop screenshots there and redeploy.
+**Real screenshots** are on the Swastika Academy (website, plus the ERP's built-in demo), Gymlive, AVK (demo data, placeholder names), PackMate and Question Paper Portal pages. Every other project has an empty folder in `portfolio/src/assets/work/<slug>/`: drop screenshots there and redeploy.
 
 **Still to confirm before launch** (from the document's own gaps list):
 - [ ] Who did what on each project. The site credits both of you unless the

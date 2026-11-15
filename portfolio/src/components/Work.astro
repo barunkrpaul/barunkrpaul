@@ -1,7 +1,11 @@
 ---
 import Cover from './Cover.astro';
+import ShotFrame from './ShotFrame.astro';
 import { featured, projects } from '../data/projects';
-const [flagship, ...rest] = featured;
+import { shotsFor } from '../data/shots';
+// Large cards: the first featured project and any flagship; the rest share the grid.
+const bigs = featured.filter((p, i) => i === 0 || p.flagship);
+const rest = featured.filter((p) => !bigs.includes(p));
 // Rows alternate 5+7 and 7+5 columns; the "your project next" card fills the gap.
 const span = (i: number) => (Math.floor(i / 2) % 2 === 0 ? [5, 7] : [7, 5])[i % 2];
 const nextSpan = rest.length % 2 === 0 ? 12 : 12 - span(rest.length - 1);
@@ -15,19 +19,26 @@ const nextSpan = rest.length % 2 === 0 ? 12 : 12 - span(rest.length - 1);
     </div>
 
     <div class="bento">
-      <a href={`/work/${flagship.slug}`} class="card card-flag reveal" data-tilt data-hover>
-        <div class="spot"></div>
-        <div class="card-text">
-          <div class="meta"><span class="chip flag">★ Flagship · {flagship.year}</span><span class="chip">{flagship.category}</span></div>
-          <h3 transition:name={`title-${flagship.slug}`}>{flagship.title}</h3>
-          <p>{flagship.summary}</p>
-          <ul class="mini-metrics">
-            {flagship.metrics.map((m) => <li><b>{m.value}</b><span>{m.label}</span></li>)}
-          </ul>
-          <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </div>
-        <Cover kind={flagship.cover} accent={flagship.accent} label={flagship.title} large />
-      </a>
+      {bigs.map((f) => {
+        const shot = f.cover === 'mono' ? shotsFor(f.slug).find((x) => !x.phone) : undefined;
+        return (
+          <a href={`/work/${f.slug}`} class="card card-flag reveal" data-tilt data-hover>
+            <div class="spot"></div>
+            <div class="card-text">
+              <div class="meta"><span class="chip flag">{f.badge ?? (f.flagship ? `★ Flagship · ${f.year}` : f.year)}</span><span class="chip">{f.category}</span></div>
+              <h3 transition:name={`title-${f.slug}`}>{f.title}</h3>
+              <p>{f.summary}</p>
+              <ul class="mini-metrics">
+                {f.metrics.map((m) => <li><b>{m.value}</b><span>{m.label}</span></li>)}
+              </ul>
+              <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            {shot
+              ? <div class="shot-cover" style={`--a1:${f.accent[0]};--a2:${f.accent[1]}`}><ShotFrame shot={shot} interactive={false} address={new URL(f.links[0]?.href ?? 'https://example.com').host} sizes="(max-width: 960px) 100vw, 640px" /></div>
+              : <Cover kind={f.cover} accent={f.accent} label={f.title} large />}
+          </a>
+        );
+      })}
 
       {rest.map((p, i) => (
         <a href={`/work/${p.slug}`} class:list={['card', 'reveal']} style={`--d:${(i % 2) * 0.08}s;--span:${span(i)}`} data-tilt data-hover>
@@ -96,6 +107,13 @@ const nextSpan = rest.length % 2 === 0 ? 12 : 12 - span(rest.length - 1);
   .card-flag { grid-column: span 12; display: grid; grid-template-columns: 1fr 1.15fr; align-items: center; padding: 14px; gap: 14px; }
   .card-flag .card-text { padding: 26px 20px; gap: 18px; }
   .card-flag h3 { font-size: clamp(40px, 5.6vw, 76px); }
+  .shot-cover {
+    display: grid; place-items: center; min-height: 360px; padding: 28px; border-radius: 18px; border: 1px solid var(--line);
+    background: radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--a1) 24%, transparent), transparent 60%),
+                radial-gradient(100% 80% at 0% 100%, color-mix(in srgb, var(--a2) 20%, transparent), transparent 60%), var(--bg-2);
+  }
+  .shot-cover :global(.shot) { width: 100%; transform: perspective(1200px) rotateY(-6deg) rotateX(3deg); transition: transform 0.6s var(--ease); }
+  .card:hover .shot-cover :global(.shot) { transform: none; }
   .mini-metrics { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, auto); gap: 18px; justify-content: start; }
   .mini-metrics li { display: grid; }
   .mini-metrics b { font-family: var(--font-display); font-size: 28px; line-height: 1; }

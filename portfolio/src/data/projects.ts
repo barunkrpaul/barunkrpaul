@@ -39,6 +39,8 @@ export interface Project {
   /** Who built it. Defaults to both. TODO (Ujjal & Barun): confirm each. */
   credit?: string;
   motto?: string;
+  /** Label on the large home-page card (defaults to Flagship for flagship projects). */
+  badge?: string;
   /** Shown under the screenshot gallery heading. */
   screensNote?: string;
 }
@@ -48,6 +50,43 @@ export const creditOf = (p: Project) => p.credit ?? BOTH;
 
 export const projects: Project[] = [
   // ───────────────────────── Featured ─────────────────────────
+  {
+    slug: 'swastika-academy',
+    title: 'Swastika Academy',
+    client: 'Swastika Academy, Lalgola, Murshidabad (CBSE school)',
+    group: 'Live platforms',
+    category: 'School website & ERP',
+    year: '2026',
+    status: 'Live',
+    featured: true,
+    badge: '★ New · Live',
+    summary:
+      'The website and school ERP for Swastika Academy, a CBSE co-education day boarding school in Lalgola, Murshidabad: parents find admissions, fees, notices and the calendar online, and the school runs attendance, fees, exams and transport from one system.',
+    problem:
+      'A school has two audiences to serve. Parents want one trustworthy place for admissions, fees, notices and the calendar, and the office and teachers need one system for attendance, marks, fees and transport, instead of paper registers, phone calls and scattered WhatsApp messages.',
+    highlights: [
+      'Public school website: about, trustees, faculty, academics from Nursery to Class X, facilities, events and a photo gallery',
+      'Admissions with a step-by-step process and one-tap WhatsApp enquiry, plus the fee structure for the session',
+      'Notice board with category filters and downloadable PDF notices, and the academic calendar for 2026–27',
+      'School ERP with a portal for every role: principal, admin, teacher, accountant, librarian, transport, HR, gate, student and parent',
+      'Principal dashboard with live numbers, AI insights that flag students at risk, and analytics',
+      'Attendance and marks entry, fee collection with printable receipts and ledgers, library, live bus tracking, gate entry and visitors',
+      'Security built in: data encrypted at rest, hardened sign-in and a full audit trail',
+    ],
+    metrics: [
+      { value: '13', label: 'Classes, Nursery to X' },
+      { value: '10', label: 'User roles in the ERP' },
+      { value: '35', label: 'ERP modules' },
+    ],
+    stack: ['HTML, CSS & JavaScript', 'Single-file offline ERP', 'Encryption at rest', 'Firebase Hosting'],
+    links: [
+      { label: 'Visit the school website', href: 'https://swastikaacademy.web.app' },
+      { label: 'Try the ERP demo', href: 'https://swastikaacademy.web.app/Swastika-Academy-ERP.html' },
+    ],
+    cover: 'mono',
+    accent: ['#F5C542', '#4C6EF5'],
+    screensNote: 'ERP screens are from its built-in demo with sample data.',
+  },
   {
     slug: 'gymlive-2026',
     title: 'Gymlive 2026',
